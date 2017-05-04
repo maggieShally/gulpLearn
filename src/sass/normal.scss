@@ -1,0 +1,9 @@
+$defaultColor :#ccc;
+
+.box {
+	width: 100px;
+	height: 100px;
+	border: 1px solid $defaultColor;
+	background-color: #ddd;
+	font-size: 18px;
+}
