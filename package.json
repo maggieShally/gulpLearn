@@ -19,8 +19,10 @@
     "gulp-uglify": "^2.1.2",
     "gulp-useref": "^3.1.2",
     "gulp-watch": "^4.3.11",
+    "gulp.spritesmith": "^6.4.0",
     "less": "^2.7.2",
-    "node-sass": "^4.5.2"
+    "node-sass": "^4.5.2",
+    "run-sequence": "^1.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

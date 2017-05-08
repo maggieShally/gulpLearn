@@ -1,0 +1,211 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$arrow-down-a-name: 'arrow-down-a';
+$arrow-down-a-x: 342px;
+$arrow-down-a-y: 128px;
+$arrow-down-a-offset-x: -342px;
+$arrow-down-a-offset-y: -128px;
+$arrow-down-a-width: 18px;
+$arrow-down-a-height: 18px;
+$arrow-down-a-total-width: 368px;
+$arrow-down-a-total-height: 342px;
+$arrow-down-a-image: 'sprite.png';
+$arrow-down-a: (342px, 128px, -342px, -128px, 18px, 18px, 368px, 342px, 'sprite.png', 'arrow-down-a', );
+$arrow-down-name: 'arrow-down';
+$arrow-down-x: 342px;
+$arrow-down-y: 110px;
+$arrow-down-offset-x: -342px;
+$arrow-down-offset-y: -110px;
+$arrow-down-width: 18px;
+$arrow-down-height: 18px;
+$arrow-down-total-width: 368px;
+$arrow-down-total-height: 342px;
+$arrow-down-image: 'sprite.png';
+$arrow-down: (342px, 110px, -342px, -110px, 18px, 18px, 368px, 342px, 'sprite.png', 'arrow-down', );
+$check-name: 'check';
+$check-x: 342px;
+$check-y: 146px;
+$check-offset-x: -342px;
+$check-offset-y: -146px;
+$check-width: 17px;
+$check-height: 12px;
+$check-total-width: 368px;
+$check-total-height: 342px;
+$check-image: 'sprite.png';
+$check: (342px, 146px, -342px, -146px, 17px, 12px, 368px, 342px, 'sprite.png', 'check', );
+$close-name: 'close';
+$close-x: 342px;
+$close-y: 0px;
+$close-offset-x: -342px;
+$close-offset-y: 0px;
+$close-width: 26px;
+$close-height: 26px;
+$close-total-width: 368px;
+$close-total-height: 342px;
+$close-image: 'sprite.png';
+$close: (342px, 0px, -342px, 0px, 26px, 26px, 368px, 342px, 'sprite.png', 'close', );
+$i-search-a-name: 'i-search-a';
+$i-search-a-x: 342px;
+$i-search-a-y: 89px;
+$i-search-a-offset-x: -342px;
+$i-search-a-offset-y: -89px;
+$i-search-a-width: 21px;
+$i-search-a-height: 21px;
+$i-search-a-total-width: 368px;
+$i-search-a-total-height: 342px;
+$i-search-a-image: 'sprite.png';
+$i-search-a: (342px, 89px, -342px, -89px, 21px, 21px, 368px, 342px, 'sprite.png', 'i-search-a', );
+$i-search-name: 'i-search';
+$i-search-x: 342px;
+$i-search-y: 26px;
+$i-search-offset-x: -342px;
+$i-search-offset-y: -26px;
+$i-search-width: 21px;
+$i-search-height: 21px;
+$i-search-total-width: 368px;
+$i-search-total-height: 342px;
+$i-search-image: 'sprite.png';
+$i-search: (342px, 26px, -342px, -26px, 21px, 21px, 368px, 342px, 'sprite.png', 'i-search', );
+$i-user-a-name: 'i-user-a';
+$i-user-a-x: 342px;
+$i-user-a-y: 47px;
+$i-user-a-offset-x: -342px;
+$i-user-a-offset-y: -47px;
+$i-user-a-width: 21px;
+$i-user-a-height: 21px;
+$i-user-a-total-width: 368px;
+$i-user-a-total-height: 342px;
+$i-user-a-image: 'sprite.png';
+$i-user-a: (342px, 47px, -342px, -47px, 21px, 21px, 368px, 342px, 'sprite.png', 'i-user-a', );
+$i-user-name: 'i-user';
+$i-user-x: 342px;
+$i-user-y: 68px;
+$i-user-offset-x: -342px;
+$i-user-offset-y: -68px;
+$i-user-width: 21px;
+$i-user-height: 21px;
+$i-user-total-width: 368px;
+$i-user-total-height: 342px;
+$i-user-image: 'sprite.png';
+$i-user: (342px, 68px, -342px, -68px, 21px, 21px, 368px, 342px, 'sprite.png', 'i-user', );
+$refund-end-a-name: 'refund-end-a';
+$refund-end-a-x: 171px;
+$refund-end-a-y: 171px;
+$refund-end-a-offset-x: -171px;
+$refund-end-a-offset-y: -171px;
+$refund-end-a-width: 171px;
+$refund-end-a-height: 171px;
+$refund-end-a-total-width: 368px;
+$refund-end-a-total-height: 342px;
+$refund-end-a-image: 'sprite.png';
+$refund-end-a: (171px, 171px, -171px, -171px, 171px, 171px, 368px, 342px, 'sprite.png', 'refund-end-a', );
+$refund-end-name: 'refund-end';
+$refund-end-x: 0px;
+$refund-end-y: 171px;
+$refund-end-offset-x: 0px;
+$refund-end-offset-y: -171px;
+$refund-end-width: 171px;
+$refund-end-height: 171px;
+$refund-end-total-width: 368px;
+$refund-end-total-height: 342px;
+$refund-end-image: 'sprite.png';
+$refund-end: (0px, 171px, 0px, -171px, 171px, 171px, 368px, 342px, 'sprite.png', 'refund-end', );
+$refund-ing-a-name: 'refund-ing-a';
+$refund-ing-a-x: 171px;
+$refund-ing-a-y: 0px;
+$refund-ing-a-offset-x: -171px;
+$refund-ing-a-offset-y: 0px;
+$refund-ing-a-width: 171px;
+$refund-ing-a-height: 171px;
+$refund-ing-a-total-width: 368px;
+$refund-ing-a-total-height: 342px;
+$refund-ing-a-image: 'sprite.png';
+$refund-ing-a: (171px, 0px, -171px, 0px, 171px, 171px, 368px, 342px, 'sprite.png', 'refund-ing-a', );
+$refund-ing-name: 'refund-ing';
+$refund-ing-x: 0px;
+$refund-ing-y: 0px;
+$refund-ing-offset-x: 0px;
+$refund-ing-offset-y: 0px;
+$refund-ing-width: 171px;
+$refund-ing-height: 171px;
+$refund-ing-total-width: 368px;
+$refund-ing-total-height: 342px;
+$refund-ing-image: 'sprite.png';
+$refund-ing: (0px, 0px, 0px, 0px, 171px, 171px, 368px, 342px, 'sprite.png', 'refund-ing', );
+$spritesheet-width: 368px;
+$spritesheet-height: 342px;
+$spritesheet-image: 'sprite.png';
+$spritesheet-sprites: ($arrow-down-a, $arrow-down, $check, $close, $i-search-a, $i-search, $i-user-a, $i-user, $refund-end-a, $refund-end, $refund-ing-a, $refund-ing, );
+$spritesheet: (368px, 342px, 'sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

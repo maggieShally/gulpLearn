@@ -1,0 +1,90 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-arrow-down-a {
+  background-image: url(sprite.png);
+  background-position: -342px -128px;
+  width: 18px;
+  height: 18px;
+}
+.icon-arrow-down {
+  background-image: url(sprite.png);
+  background-position: -342px -110px;
+  width: 18px;
+  height: 18px;
+}
+.icon-check {
+  background-image: url(sprite.png);
+  background-position: -342px -146px;
+  width: 17px;
+  height: 12px;
+}
+.icon-close {
+  background-image: url(sprite.png);
+  background-position: -342px 0px;
+  width: 26px;
+  height: 26px;
+}
+.icon-i-search-a {
+  background-image: url(sprite.png);
+  background-position: -342px -89px;
+  width: 21px;
+  height: 21px;
+}
+.icon-i-search {
+  background-image: url(sprite.png);
+  background-position: -342px -26px;
+  width: 21px;
+  height: 21px;
+}
+.icon-i-user-a {
+  background-image: url(sprite.png);
+  background-position: -342px -47px;
+  width: 21px;
+  height: 21px;
+}
+.icon-i-user {
+  background-image: url(sprite.png);
+  background-position: -342px -68px;
+  width: 21px;
+  height: 21px;
+}
+.icon-refund-end-a {
+  background-image: url(sprite.png);
+  background-position: -171px -171px;
+  width: 171px;
+  height: 171px;
+}
+.icon-refund-end {
+  background-image: url(sprite.png);
+  background-position: 0px -171px;
+  width: 171px;
+  height: 171px;
+}
+.icon-refund-ing-a {
+  background-image: url(sprite.png);
+  background-position: -171px 0px;
+  width: 171px;
+  height: 171px;
+}
+.icon-refund-ing {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 171px;
+  height: 171px;
+}
