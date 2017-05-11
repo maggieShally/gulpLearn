@@ -11,7 +11,10 @@ var imagemin	= require('gulp-imagemin');//图片压缩
 var cache		= require('gulp-cache');//减少图片重复压缩
 var del			= require('del');//清理生成文件
 var runSequence	= require('run-sequence');//按照顺序执行
-var spritesmith= require('gulp.spritesmith');//生成雪碧图
+var spritesmith = require('gulp.spritesmith');//生成雪碧图
+var browserify  = require('browserify');
+var babelify	= require('babelify');//babel配合browserify需安装babelify
+var source		= require('vinyl-source-stream');//vinyl-source-stream用于将Browserify的bundle()的输出转换为Gulp可用的[vinyl][]（一种虚拟文件格式）流
 
 
 gulp.task('testLess',function(){
@@ -73,6 +76,16 @@ gulp.task('clean:dist',function(callback){
 })
 
 
+gulp.task('script:build',function(){
+	browserify('src/js/main.js')
+		.transform(babelify,{
+			presets:['es2015','react']
+		})
+		.bundle()
+		.pipe(source('bundle.js'))
+		.pipe(gulp.dest('src/js'))
+})
+
 
 gulp.task('watch',['browserSync','sass'],function(){
 	gulp.watch('src/sass/*.scss',['sass']);
@@ -105,7 +118,7 @@ gulp.task('build',function(callback){
 })
 
 gulp.task('default',function(callback){
-	runSequence(['sass','browserSync','watch','sprite'],callback)
+	runSequence(['sass','browserSync','watch','sprite','script:build'],callback)
 })
 
 
