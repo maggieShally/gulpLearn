@@ -19,9 +19,9 @@ export var CommentList = React.createClass({
  render: function() {
     var commentNodes = this.props.data.map(function(comment) {
       return (
-         <div className="comment" key={comment.id}>
+         <div className="comment" key={comment.comments}>
             <h2 className="commentAuthor">
-              {comment.author}
+              {comment.comments_url}
             </h2>
           </div>
       );
