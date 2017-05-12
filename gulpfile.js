@@ -77,12 +77,12 @@ gulp.task('clean:dist',function(callback){
 
 
 gulp.task('script:build',function(){
-	browserify('src/js/main.js')
+	browserify('src/js/remain.js')
 		.transform(babelify,{
 			presets:['es2015','react']
 		})
 		.bundle()
-		.pipe(source('bundle.js'))
+		.pipe(source('bundle2.js'))
 		.pipe(gulp.dest('src/js'))
 })
 
