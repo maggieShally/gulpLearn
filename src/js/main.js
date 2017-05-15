@@ -1,14 +1,9 @@
 let React  = require('react');
 let ReactDOM = require('react-dom');
-// require('./tt2.js');
 
 
 import { CommentList, CommentForm } from './tt2.js'
 
-// ReactDOM.render(
-//     <h1>Hello, world!</h1>,
-//     document.getElementById('reactApp')
-// );
 
 
 var data = [

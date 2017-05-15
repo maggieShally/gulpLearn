@@ -1,8 +1,17 @@
-var arr=[1,2,3,4,5,6];
 
-// console.log(arr);
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import App from './containers/App'
+import todoApp from './reducers/reducers'
 
-// var str="langlign@qq.com",
+let store = createStore(todoApp);
 
-// reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-// reg.test(str);
+let rootElement = document.getElementById('reApp')
+render(
+  <Provider store = {store}>
+    <App />
+  </Provider>,
+  rootElement
+)

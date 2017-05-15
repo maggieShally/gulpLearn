@@ -77,7 +77,7 @@ gulp.task('clean:dist',function(callback){
 
 
 gulp.task('script:build',function(){
-	browserify('src/js/remain.js')
+	browserify('src/js/index.js')
 		.transform(babelify,{
 			presets:['es2015','react']
 		})
