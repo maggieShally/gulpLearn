@@ -12,6 +12,7 @@ export default class Todo extends Component{
 				}}
 			>
 				{this.props.text}
+				<span></span>
 			</li>
 		)
 	}

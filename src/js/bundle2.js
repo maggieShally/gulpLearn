@@ -23009,10 +23009,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addTodo = addTodo;
 exports.toggleTodo = toggleTodo;
+exports.addNum = addNum;
+exports.reduceNum = reduceNum;
 exports.setVisibilityFilter = setVisibilityFilter;
 var ADD_TODO = exports.ADD_TODO = 'ADD_TODO';
 var TOGGLE_TODO = exports.TOGGLE_TODO = 'TOGGLE_TODO';
 var SET_VISIBILITY_FILTER = exports.SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+var ADD_NUM = exports.ADD_NUM = 'ADD_NUM';
+var REDUCE_NUM = exports.REDUCE_NUM = 'REDUCE_NUM';
 
 var VisibilityFilters = exports.VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -23033,6 +23037,20 @@ function toggleTodo(index) {
   return {
     type: TOGGLE_TODO,
     index: index
+  };
+}
+
+function addNum(val) {
+  return {
+    type: ADD_NUM,
+    val: val
+  };
+}
+
+function reduceNum(val) {
+  return {
+    type: REDUCE_NUM,
+    val: val
   };
 }
 
@@ -23233,7 +23251,8 @@ var Todo = function (_Component) {
 						cursor: this.props.completed ? 'default' : 'pointer'
 					}
 				},
-				this.props.text
+				this.props.text,
+				_react2.default.createElement('span', null)
 			);
 		}
 	}]);
@@ -23294,7 +23313,7 @@ var TodoList = function (_Component) {
 			return _react2.default.createElement(
 				'ul',
 				null,
-				this.props.todos.map(function (todo, index) {
+				this.props.todoas.map(function (todo, index) {
 					return _react2.default.createElement(_Todo2.default, _extends({}, todo, {
 						key: index,
 						onClick: function onClick() {
@@ -23314,13 +23333,130 @@ exports.default = TodoList;
 
 TodoList.propTypes = {
 	onTodoClick: _react.PropTypes.func.isRequired,
-	todos: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+	todoas: _react.PropTypes.arrayOf(_react.PropTypes.shape({
 		text: _react.PropTypes.string.isRequired,
 		completed: _react.PropTypes.bool.isRequired
 	}).isRequired).isRequired
 };
 
 },{"./Todo":224,"react":220}],226:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var data = [{ id: 1, author: "Pete Hunt", text: "This is one comment" }, { id: 2, author: "Jordan Walke", text: "This is *another* comment" }];
+
+var CountNum = function (_Component) {
+  _inherits(CountNum, _Component);
+
+  function CountNum(props) {
+    _classCallCheck(this, CountNum);
+
+    var _this = _possibleConstructorReturn(this, (CountNum.__proto__ || Object.getPrototypeOf(CountNum)).call(this, props));
+
+    _this.state = {
+      title: 'this is a big title'
+    };
+    return _this;
+  }
+
+  _createClass(CountNum, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('input', { type: 'number', ref: 'countInput' }),
+        _react2.default.createElement(
+          'button',
+          { onClick: function onClick(e) {
+              return _this2.addNumClick(e);
+            }, type: 'button' },
+          '\u52A0\u52A0'
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: function onClick(e) {
+              return _this2.reduceNumClick(e);
+            }, type: 'button' },
+          '\u51CF\u51CF'
+        ),
+        _react2.default.createElement(
+          'span',
+          null,
+          this.props.counts
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          this.state.title
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          this.props.data.map(function (item) {
+            return _react2.default.createElement(
+              'li',
+              { key: item.id },
+              item.author,
+              '------',
+              item.text
+            );
+          })
+        )
+      );
+    }
+  }, {
+    key: 'addNumClick',
+    value: function addNumClick(e) {
+      var node = _reactDom2.default.findDOMNode(this.refs.countInput);
+      var val = parseInt(node.value.trim());
+      this.props.onAddCountClick(val);
+      node.value = '';
+    }
+  }, {
+    key: 'reduceNumClick',
+    value: function reduceNumClick(e) {
+      var node = _reactDom2.default.findDOMNode(this.refs.countInput);
+      var val = parseInt(node.value.trim());
+      this.props.onRecudeCountClick(val);
+      node.value = '';
+    }
+  }]);
+
+  return CountNum;
+}(_react.Component);
+
+exports.default = CountNum;
+
+
+CountNum.defaultProps = {
+  data: data
+};
+
+},{"react":220,"react-dom":54}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23353,6 +23489,10 @@ var _Footer = require('../components/Footer');
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
+var _counter = require('../components/counter');
+
+var _counter2 = _interopRequireDefault(_counter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23376,22 +23516,32 @@ var App = function (_Component) {
 			var _props = this.props,
 			    dispatch = _props.dispatch,
 			    visibleTodos = _props.visibleTodos,
-			    visibilityFilter = _props.visibilityFilter;
+			    visibilityFilter = _props.visibilityFilter,
+			    constMin = _props.constMin,
+			    counter = _props.counter;
 
 			return _react2.default.createElement(
 				'div',
 				null,
+				_react2.default.createElement(_counter2.default, {
+					counts: this.props.counter,
+					onAddCountClick: function onAddCountClick(val) {
+						return dispatch((0, _actions.addNum)(val));
+					},
+
+					onRecudeCountClick: function onRecudeCountClick(val) {
+						return dispatch((0, _actions.reduceNum)(val));
+					}
+				}),
+				_react2.default.createElement('span', null),
 				_react2.default.createElement(_AddTodo2.default, {
 					onAddClick: function onAddClick(text) {
-						return (
-							// console.log('add todo:',text)
-							dispatch((0, _actions.addTodo)(text))
-						);
+						return dispatch((0, _actions.addTodo)(text));
 					}
 				}),
 				_react2.default.createElement('span', null),
 				_react2.default.createElement(_TodoList2.default, {
-					todos: this.props.visibleTodos
+					todoas: this.props.visibleTodos
 					// todos={[{
 					//           text: 'Use Redux',
 					//           completed: true
@@ -23426,11 +23576,12 @@ var App = function (_Component) {
 }(_react.Component);
 
 App.propTypes = {
+	counter: _react.PropTypes.number.isRequired,
 	visibleTodos: _react.PropTypes.arrayOf(_react.PropTypes.shape({
 		text: _react.PropTypes.string.isRequired,
 		completed: _react.PropTypes.bool.isRequired
 	})),
-	visibilityFilter: _react.PropTypes.oneOf(['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_ACTIVE']).isRequired
+	visibilityFilter: _react.PropTypes.oneOf(['SHOW_COMPLETED', 'SHOW_ALL', 'SHOW_ACTIVE']).isRequired
 };
 
 function selectTodos(todos, filter) {
@@ -23451,16 +23602,19 @@ function selectTodos(todos, filter) {
 // 基于全局 state ，哪些是我们想注入的 props ?
 // 注意：使用 https://github.com/reactjs/reselect 效果更佳。
 function select(state) {
+	console.log(state);
 	return {
 		visibleTodos: selectTodos(state.todos, state.visibilityFilter),
-		visibilityFilter: state.visibilityFilter
+		visibilityFilter: state.visibilityFilter,
+		constMin: '100',
+		counter: state.numText
 	};
 }
 
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 exports.default = (0, _reactRedux.connect)(select)(App);
 
-},{"../action/actions":221,"../components/AddTodo":222,"../components/Footer":223,"../components/TodoList":225,"react":220,"react-dom":54,"react-redux":189}],227:[function(require,module,exports){
+},{"../action/actions":221,"../components/AddTodo":222,"../components/Footer":223,"../components/TodoList":225,"../components/counter":226,"react":220,"react-dom":54,"react-redux":189}],228:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -23485,6 +23639,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var store = (0, _redux.createStore)(_reducers2.default);
 
+store.getState();
+
 var rootElement = document.getElementById('reApp');
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
@@ -23492,7 +23648,7 @@ var rootElement = document.getElementById('reApp');
   _react2.default.createElement(_App2.default, null)
 ), rootElement);
 
-},{"./containers/App":226,"./reducers/reducers":228,"react":220,"react-dom":54,"react-redux":189,"redux":17}],228:[function(require,module,exports){
+},{"./containers/App":227,"./reducers/reducers":229,"react":220,"react-dom":54,"react-redux":189,"redux":17}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23512,6 +23668,7 @@ function visibilityFilter() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : SHOW_ALL;
 	var action = arguments[1];
 
+	console.log(action.type);
 	switch (action.type) {
 		case _actions.SET_VISIBILITY_FILTER:
 			return action.filter;
@@ -23520,8 +23677,13 @@ function visibilityFilter() {
 	}
 }
 
+var datas = [{
+	text: 'hello world',
+	completed: false
+}];
+
 function todos() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : datas;
 	var action = arguments[1];
 
 	switch (action.type) {
@@ -23532,9 +23694,11 @@ function todos() {
 				completed: false
 			}]);
 		case _actions.TOGGLE_TODO:
+			console.log(state);
 			return state.map(function (todo, index) {
 				if (index === action.index) {
-					return Object.assign({}, state, {
+					return Object.assign({}, todo, {
+						text: todo.text,
 						completed: !todo.completed
 					});
 				}
@@ -23545,10 +23709,26 @@ function todos() {
 	}
 }
 
+function numText() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+	var action = arguments[1];
+
+	console.log(state);
+	console.log(action.type);
+	switch (action.type) {
+		case _actions.ADD_NUM:
+			return state + (action.val ? action.val : 1);
+		case _actions.REDUCE_NUM:
+			return state - (action.val ? action.val : 1);
+		default:
+			return state;
+	}
+}
+
 var todoApp = (0, _redux.combineReducers)({
-	visibilityFilter: visibilityFilter, todos: todos
+	visibilityFilter: visibilityFilter, todos: todos, numText: numText
 });
 
 exports.default = todoApp;
 
-},{"../action/actions.js":221,"redux":17}]},{},[227]);
+},{"../action/actions.js":221,"redux":17}]},{},[228]);

@@ -1,47 +1,56 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { findDOMNode,Component,PropTypes } from 'react'
 
-class Counter extends Component {
-  static propTypes = {
-    value: PropTypes.number.isRequired,
-    onIncrement: PropTypes.func.isRequired,
-    onDecrement: PropTypes.func.isRequired
-  }
+import ReactDOM from 'react-dom'
 
-  incrementIfOdd = () => {
-    if (this.props.value % 2 !== 0) {
-      this.props.onIncrement()
+
+var data = [
+  {id: 1, author: "Pete Hunt", text: "This is one comment"},
+  {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
+];
+
+export default class CountNum extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: 'this is a big title'
     }
   }
 
-  incrementAsync = () => {
-    setTimeout(this.props.onIncrement, 1000)
-  }
-
-  render() {
-    const { value, onIncrement, onDecrement } = this.props
+  render(){
     return (
-      <p>
-        Clicked: {value} times
-        {' '}
-        <button onClick={onIncrement}>
-          +
-        </button>
-        {' '}
-        <button onClick={onDecrement}>
-          -
-        </button>
-        {' '}
-        <button onClick={this.incrementIfOdd}>
-          Increment if odd
-        </button>
-        {' '}
-        <button onClick={this.incrementAsync}>
-          Increment async
-        </button>
-      </p>
+      <div>
+        <input type="number" ref="countInput"/>
+        <button onClick = {e => this.addNumClick(e)} type="button">加加</button>
+        <button onClick = {e => this.reduceNumClick(e)} type="button">减减</button>
+        <span>{this.props.counts}</span>
+        <h2>{this.state.title}</h2>
+        <ul>
+          {
+            this.props.data.map(function(item){
+              return <li key={item.id}>{item.author}------{item.text}</li>
+            })
+          }
+        </ul>
+      </div>
     )
+  }
+  addNumClick(e){
+    const node = ReactDOM.findDOMNode(this.refs.countInput);
+    const val = parseInt(node.value.trim());
+    this.props.onAddCountClick(val);
+    node.value = '';
+  }
+  reduceNumClick(e){
+    const node = ReactDOM.findDOMNode(this.refs.countInput);
+    const val = parseInt(node.value.trim());
+    this.props.onRecudeCountClick(val);
+    node.value = '';
   }
 }
 
-export default Counter
+
+CountNum.defaultProps = {
+    data: data
+}
+
+

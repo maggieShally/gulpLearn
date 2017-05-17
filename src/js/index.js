@@ -8,6 +8,8 @@ import todoApp from './reducers/reducers'
 
 let store = createStore(todoApp);
 
+store.getState();
+
 let rootElement = document.getElementById('reApp')
 render(
   <Provider store = {store}>
