@@ -8,7 +8,6 @@ const { SHOW_ALL } = VisibilityFilters
 
 
 function visibilityFilter(state = SHOW_ALL,action){
-	console.log(action.type);
 	switch(action.type) {
 		case SET_VISIBILITY_FILTER:
 			return action.filter;
@@ -30,7 +29,6 @@ const datas = [
 function todos(state = datas,action){
 	switch(action.type) {
 		case ADD_TODO:
-			console.log(state);
 			return [
 				...state,
 				{
@@ -39,7 +37,6 @@ function todos(state = datas,action){
 				}
 			]
 		case TOGGLE_TODO:
-			console.log(state);
 			return state.map((todo,index) => {
 				if(index === action.index){
 					return Object.assign({},todo,{
@@ -55,8 +52,6 @@ function todos(state = datas,action){
 }
 
 function numText(state = 0 ,action){
-	console.log(state);
-	console.log(action.type);
 	switch(action.type){
 		case ADD_NUM:
 			return state + (action.val?action.val:1)

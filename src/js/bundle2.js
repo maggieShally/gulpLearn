@@ -23641,6 +23641,14 @@ var store = (0, _redux.createStore)(_reducers2.default);
 
 store.getState();
 
+var next = store.dispatch;
+
+store.dispatch = function dispatchAndLog(action) {
+  console.log('dispatching', action);
+  next(action);
+  console.log('next state', store.getState);
+};
+
 var rootElement = document.getElementById('reApp');
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
@@ -23668,7 +23676,6 @@ function visibilityFilter() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : SHOW_ALL;
 	var action = arguments[1];
 
-	console.log(action.type);
 	switch (action.type) {
 		case _actions.SET_VISIBILITY_FILTER:
 			return action.filter;
@@ -23688,13 +23695,11 @@ function todos() {
 
 	switch (action.type) {
 		case _actions.ADD_TODO:
-			console.log(state);
 			return [].concat(_toConsumableArray(state), [{
 				text: action.text,
 				completed: false
 			}]);
 		case _actions.TOGGLE_TODO:
-			console.log(state);
 			return state.map(function (todo, index) {
 				if (index === action.index) {
 					return Object.assign({}, todo, {
@@ -23713,8 +23718,6 @@ function numText() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 	var action = arguments[1];
 
-	console.log(state);
-	console.log(action.type);
 	switch (action.type) {
 		case _actions.ADD_NUM:
 			return state + (action.val ? action.val : 1);
