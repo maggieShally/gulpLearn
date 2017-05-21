@@ -10,8 +10,22 @@
 <script>
 	
 
+// var  fetchPosts = postTitle => (a,b) =>{
+// 	console.log(a+b) ;
+// }
 
 
+// var fetchPosts = postTitle => function(a,b){
+// 	console.log(a+b);
+// }
+
+
+var fetchPosts = function(postTitle){
+	console.log(postTitle);
+	return function(a,b){
+		console.log(a+b);
+	}
+}
 </script>
 </body>
 </html>

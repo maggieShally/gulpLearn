@@ -5,14 +5,18 @@ import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './containers/App'
 import todoApp from './reducers/reducers'
-import createLogger from 'redux-logger'
+import { createLogger } from 'redux-logger'
+import thunk from 'redux-thunk'
+import promiseMiddleware from 'redux-promise'
+import { createAction } from 'redux-actions'
+
 
 const logger = createLogger();
 
 
 let store = createStore(
 	todoApp,
-	applyMiddleware(logger)
+	applyMiddleware(promiseMiddleware,thunk,logger)
 	);
 
 store.getState();
@@ -24,6 +28,10 @@ store.dispatch = function dispatchAndLog(action){
 	next(action);
 	console.log('next state',store.getState);
 }
+
+
+
+
 
 let rootElement = document.getElementById('reApp')
 render(

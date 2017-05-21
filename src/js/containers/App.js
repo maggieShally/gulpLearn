@@ -10,6 +10,16 @@ import TodoList from '../components/TodoList'
 import Footer from '../components/Footer'
 import CountNum from '../components/counter'
 
+const fetchPost = postText =>(dispatch,getState)=>{
+	dispatch(addTodo(postText));
+	return (function(){
+		console.log('fetchPost');
+		let tempText = postText+'fetch';
+		dispatch(addTodo(tempText))
+	})()
+}
+
+
 
 
 class App extends Component{
@@ -26,7 +36,7 @@ class App extends Component{
 				<span></span>
 				<AddTodo
 					onAddClick={text => 
-						dispatch(addTodo(text))
+						dispatch(fetchPost(text))
 					}
 				/>
 				<span></span>

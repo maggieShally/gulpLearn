@@ -19,7 +19,7 @@ export const VisibilityFilters = {
  export function addTodo(text){
  	return {
  		type: ADD_TODO,
- 		text: text+'110'
+ 		text: text
  	}
  }
 
