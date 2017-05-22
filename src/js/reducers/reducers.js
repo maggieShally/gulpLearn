@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux'
 
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters,ADD_NUM,REDUCE_NUM } from '../action/actions.js'
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters,ADD_NUM,REDUCE_NUM ,GET_CUSTOMER_LIST} from '../action/actions.js'
 const { SHOW_ALL } = VisibilityFilters
 
 
@@ -63,10 +63,30 @@ function numText(state = 0 ,action){
 }
 
 
+const customerList = [
+	{
+		name: 'name001',
+		sex: 'female'
+	}
+];
+
+function getCostomerList(state = customerList,action){
+	switch(action.type){
+		case GET_CUSTOMER_LIST:
+			const tempList = [{
+					name: 'name002',
+					sex: 'female002'
+				}
+			];
+			return state.concat(tempList);
+		default:
+			return state;
+	}
+}
 
 
 const todoApp = combineReducers({
-	visibilityFilter,todos,numText
+	visibilityFilter,todos,numText,getCostomerList
 })
 
 export default todoApp

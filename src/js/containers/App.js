@@ -2,7 +2,7 @@ import React,{Component,PropTypes} from 'react'
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
-import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum} from '../action/actions'
+import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
 
 
 import AddTodo from '../components/AddTodo'
@@ -20,13 +20,36 @@ const fetchPost = postText =>(dispatch,getState)=>{
 }
 
 
+const Form = props => (
+	<div className="from-group">
+		<label>{props.label}</label>
+		<span className="text">{props.children}</span>
+	</div>
 
+)
+
+
+const CustomerList = props => (
+		<div>
+			<label>{props.name}</label>
+			<span>{props.children}</span>
+			<label>{props.sex}</label>
+		</div>
+)
 
 class App extends Component{
 	render(){
-		const {dispatch, visibleTodos, visibilityFilter,constMin,counter} = this.props
+		const {dispatch, visibleTodos, visibilityFilter,constMin,counter,customerList} = this.props
 		return (
 			<div>
+				{
+					this.props.customerList.map((items,index) => 
+						<div key ={index}>
+							<CustomerList name="姓名:" sex={items.sex}>{items.name}</CustomerList>
+						</div>
+					)
+				}
+
 				<CountNum
 					counts = {this.props.counter}
 					onAddCountClick = { val => dispatch(addNum(val))}
@@ -34,6 +57,7 @@ class App extends Component{
 					onRecudeCountClick = { val => dispatch(reduceNum(val))}
 				></CountNum>
 				<span></span>
+				<Form label="用户名：">{this.props.constMin}</Form>
 				<AddTodo
 					onAddClick={text => 
 						dispatch(fetchPost(text))
@@ -73,6 +97,9 @@ class App extends Component{
 
 		)
 	}
+	componentDidMount(){
+		this.props.dispatch(getTempList());
+	}
 }
 
 App.propTypes = {
@@ -107,7 +134,8 @@ function select(state) {
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter,
     constMin: '100',
-    counter: state.numText
+    counter: state.numText,
+    customerList: state.getCostomerList
   };
 }
 

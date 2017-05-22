@@ -51,3 +51,14 @@ export function reduceNum(val){
  		type : SET_VISIBILITY_FILTER,filter
  	}
  }
+
+
+ export const GET_CUSTOMER_LIST = 'GET_CUSTOMER_LIST'
+
+ export function getTempList(){
+ 	return (dispatch) => {
+ 		return fetch('https://api.github.com/users/octocat/gists')
+ 		.then(response => response.json())
+ 		.then(json => dispatch({type: GET_CUSTOMER_LIST,json}))
+ 	}
+ }
