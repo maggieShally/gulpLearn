@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box; }
+
+table {
+  margin: 30px 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: center; }

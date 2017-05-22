@@ -9,6 +9,7 @@ import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Footer from '../components/Footer'
 import CountNum from '../components/counter'
+import CustomerTable from '../components/customer-table/customer-table'
 
 const fetchPost = postText =>(dispatch,getState)=>{
 	dispatch(addTodo(postText));
@@ -42,6 +43,7 @@ class App extends Component{
 		const {dispatch, visibleTodos, visibilityFilter,constMin,counter,customerList} = this.props
 		return (
 			<div>
+				<CustomerTable></CustomerTable>
 				{
 					this.props.customerList.map((items,index) => 
 						<div key ={index}>
