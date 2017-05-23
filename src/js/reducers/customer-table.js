@@ -27,10 +27,8 @@ export default function cusMain(state = initial_state,action){
 	switch(action.type){
 		case Actions.DEL_CUSTOMER:
 			var tempDate = state.cusData.slice()
-			console.log(state);
 			tempDate.splice(action.index,1)
-			console.log(tempDate);
-			return {cusData:state.cusData, cusData:tempDate}
+			return Object.assign({},state,{cusData:tempDate});
 		default:
 			return state
 
