@@ -26,7 +26,6 @@ const Form = props => (
 		<label>{props.label}</label>
 		<span className="text">{props.children}</span>
 	</div>
-
 )
 
 
@@ -40,12 +39,14 @@ const CustomerList = props => (
 
 class App extends Component{
 	render(){
-		const {dispatch, visibleTodos, visibilityFilter,constMin,counter,customerList} = this.props
+		// const {dispatch, visibleTodos, visibilityFilter,constMin,counter,customerList} = this.props
+		const {props} = this
+		console.log(this.props);
 		return (
 			<div>
-				<CustomerTable></CustomerTable>
+				<CustomerTable cusData = {props.customer.cusData} dispatch ={props.dispatch}></CustomerTable>
 				{
-					this.props.customerList.map((items,index) => 
+					props.customerList.map((items,index) => 
 						<div key ={index}>
 							<CustomerList name="姓名:" sex={items.sex}>{items.name}</CustomerList>
 						</div>
@@ -53,21 +54,21 @@ class App extends Component{
 				}
 
 				<CountNum
-					counts = {this.props.counter}
-					onAddCountClick = { val => dispatch(addNum(val))}
+					counts = {props.counter}
+					onAddCountClick = { val => props.dispatch(addNum(val))}
 
-					onRecudeCountClick = { val => dispatch(reduceNum(val))}
+					onRecudeCountClick = { val => props.dispatch(reduceNum(val))}
 				></CountNum>
 				<span></span>
-				<Form label="用户名：">{this.props.constMin}</Form>
+				<Form label="用户名：">{props.constMin}</Form>
 				<AddTodo
 					onAddClick={text => 
-						dispatch(fetchPost(text))
+						props.dispatch(fetchPost(text))
 					}
 				/>
 				<span></span>
 				<TodoList
-					todoas = {this.props.visibleTodos}
+					todoas = {props.visibleTodos}
 					// todos={[{
 			  //           text: 'Use Redux',
 			  //           completed: true
@@ -78,15 +79,15 @@ class App extends Component{
 
 					onTodoClick = {todo => 
 						// console.log('todo clicked:', todo)
-						dispatch(toggleTodo(todo))
+						props.dispatch(toggleTodo(todo))
 					}			
 				></TodoList>
 				<span></span>
 				<Footer 
-					filter = {visibilityFilter}
+					filter = {this.props.visibilityFilter}
 					onFilterChange = {
 						nextFilter =>
-							dispatch(setVisibilityFilter(nextFilter))
+							props.dispatch(setVisibilityFilter(nextFilter))
 					}
 					// filter = 'SHOW_ALL'
 					// onFilterChange={
@@ -137,7 +138,8 @@ function select(state) {
     visibilityFilter: state.visibilityFilter,
     constMin: '100',
     counter: state.numText,
-    customerList: state.getCostomerList
+    customerList: state.getCostomerList,
+    customer: state.customer
   };
 }
 

@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters,ADD_NUM,REDUCE_NUM ,GET_CUSTOMER_LIST} from '../action/actions.js'
 const { SHOW_ALL } = VisibilityFilters
 
-
+import customer from './customer-table'
 
 function visibilityFilter(state = SHOW_ALL,action){
 	switch(action.type) {
@@ -86,7 +86,7 @@ function getCostomerList(state = customerList,action){
 
 
 const todoApp = combineReducers({
-	visibilityFilter,todos,numText,getCostomerList
+	visibilityFilter,todos,numText,getCostomerList,customer
 })
 
 export default todoApp
