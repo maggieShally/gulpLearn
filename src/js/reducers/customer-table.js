@@ -30,7 +30,7 @@ export default function cusMain(state = initial_state,action){
 			console.log(state);
 			tempDate.splice(action.index,1)
 			console.log(tempDate);
-			return {cusData:state.cusData, cusData:tempDate}
+			return {...state, cusData:tempDate}
 		default:
 			return state
 

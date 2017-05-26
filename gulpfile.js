@@ -15,7 +15,7 @@ var spritesmith = require('gulp.spritesmith');//生成雪碧图
 var browserify  = require('browserify');
 var babelify	= require('babelify');//babel配合browserify需安装babelify
 var source		= require('vinyl-source-stream');//vinyl-source-stream用于将Browserify的bundle()的输出转换为Gulp可用的[vinyl][]（一种虚拟文件格式）流
-
+var babel  		= require('gulp-babel')
 
 gulp.task('testLess',function(){
 	gulp.src(['src/less/*.less'])
@@ -76,6 +76,7 @@ gulp.task('clean:dist',function(callback){
 })
 
 
+
 gulp.task('script:build',function(){
 	browserify('src/js/index.js')
 		.transform(babelify,{
@@ -83,6 +84,7 @@ gulp.task('script:build',function(){
 		})
 		.bundle()
 		.pipe(source('bundle2.js'))
+		.pipe(babel())
 		.pipe(gulp.dest('src/js'))
 })
 
