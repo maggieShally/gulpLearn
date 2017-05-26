@@ -29,7 +29,12 @@ store.dispatch = function dispatchAndLog(action){
 	console.log('next state',store.getState);
 }
 
+var abc = {
+	test: '234'
+}
 
+var obj = [...abc,'name':'345'];
+console.log(obj);
 
 
 
