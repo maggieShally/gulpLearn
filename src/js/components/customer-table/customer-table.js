@@ -58,7 +58,7 @@ export default class Customer extends Component{
 	}
 	render(){
 		const { props } = this
-		console.log(this.props);
+		// console.log(this.props);
 		return (
 			<div>
 				<table>

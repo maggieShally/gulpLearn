@@ -5,16 +5,17 @@ import { connect } from 'react-redux';
 import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
 
 
-import AddTodo from '../components/AddTodo'
-import TodoList from '../components/TodoList'
-import Footer from '../components/Footer'
-import CountNum from '../components/counter'
-import CustomerTable from '../components/customer-table/customer-table'
+import AddTodo 			from '../components/AddTodo'
+import TodoList 		from '../components/TodoList'
+import Footer 			from '../components/Footer'
+import CountNum 		from '../components/counter'
+import CustomerTable 	from '../components/customer-table/customer-table'
+import CusForm			from '../components/forms/form-info'
 
 const fetchPost = postText =>(dispatch,getState)=>{
 	dispatch(addTodo(postText));
 	return (function(){
-		console.log('fetchPost');
+		// console.log('fetchPost');
 		let tempText = postText+'fetch';
 		dispatch(addTodo(tempText))
 	})()
@@ -38,12 +39,18 @@ const CustomerList = props => (
 )
 
 class App extends Component{
+	submit(values){
+	    // Do something with the form values
+	    console.log(values);
+	  }
 	render(){
 		// const {dispatch, visibleTodos, visibilityFilter,constMin,counter,customerList} = this.props
 		const {props} = this
 		console.log(this.props);
 		return (
 			<div>
+				<CusForm onSubmit = {this.submit} {...props.form}/>
+				<hr/>
 				<CustomerTable cusData = {props.customer.cusData} dispatch ={props.dispatch}></CustomerTable>
 				{
 					props.customerList.map((items,index) => 
@@ -132,15 +139,16 @@ function selectTodos(todos, filter) {
 // 基于全局 state ，哪些是我们想注入的 props ?
 // 注意：使用 https://github.com/reactjs/reselect 效果更佳。
 function select(state) {
-	console.log(state);
-  return {
+	 console.log(state);
+  return Object.assign({},state,{
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter,
     constMin: '100',
     counter: state.numText,
     customerList: state.getCostomerList,
-    customer: state.customer
-  };
+    customer: state.customer,
+    //form: state.simple
+  });
 }
 
 

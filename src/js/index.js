@@ -1,19 +1,20 @@
 
-import React from 'react'
-import { render } from 'react-dom'
+import React 							from 'react'
+import { render } 						from 'react-dom'
 import { applyMiddleware, createStore } from 'redux'
-import { Provider } from 'react-redux'
-import App from './containers/App'
-import todoApp from './reducers/reducers'
-import { createLogger } from 'redux-logger'
-import thunk from 'redux-thunk'
-import promiseMiddleware from 'redux-promise'
-import { createAction } from 'redux-actions'
+import { Provider } 					from 'react-redux'
+import App 								from './containers/App'
+import todoApp 							from './reducers/reducers'
+import { createLogger } 				from 'redux-logger'
+import thunk 							from 'redux-thunk'
+import promiseMiddleware 				from 'redux-promise'
+import { createAction } 				from 'redux-actions'
+
 
 
 const logger = createLogger();
 
-
+console.log(todoApp);
 let store = createStore(
 	todoApp,
 	applyMiddleware(promiseMiddleware,thunk,logger)
@@ -24,9 +25,9 @@ store.getState();
 let next = store.dispatch;
 
 store.dispatch = function dispatchAndLog(action){
-	console.log('dispatching',action);
-	next(action);
-	console.log('next state',store.getState);
+	// console.log('dispatching',action);
+	// next(action);
+	// console.log('next state',store.getState);
 }
 
 var abc = {
@@ -34,7 +35,7 @@ var abc = {
 }
 
 var obj = [...abc,'name':'345'];
-console.log(obj);
+// console.log(obj);
 
 
 

@@ -84,11 +84,12 @@ gulp.task('clean:dist',function(callback){
 
 
 gulp.task('script:build',function(){
-	browserify('src/js/index.js')
-		.transform(babelify,{presets: ["es2015", "react"]})
+	return browserify('src/js/index.js')
+		.transform(babelify,{
+			presets: ["es2015", "react"]
+		})
 		.bundle()
 		.pipe(source('bundle2.js'))
-		.pipe(babel())
 		.pipe(gulp.dest('src/js'))
 })
 
@@ -96,8 +97,7 @@ gulp.task('script:build',function(){
 gulp.task('watch',['browserSync','sass'],function(){
 	gulp.watch('src/sass/*.scss',['sass']);
 	gulp.watch('src/pages/*.html');
-	gulp.watch('src/**/*.js');
-	// gulp.watch('src/js/*.js',['script:build']);
+	gulp.watch('src/js/*.js');
 	gulp.watch('src/less/*.less',['testLess'])
 })
 
