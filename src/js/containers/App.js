@@ -1,6 +1,8 @@
 import React,{Component,PropTypes} from 'react'
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
 
 import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
 
@@ -10,7 +12,7 @@ import TodoList 		from '../components/TodoList'
 import Footer 			from '../components/Footer'
 import CountNum 		from '../components/counter'
 import CustomerTable 	from '../components/customer-table/customer-table'
-import CusForm			from '../components/forms/form-info'
+import SimpleForm		from '../components/forms/form-info'
 
 const fetchPost = postText =>(dispatch,getState)=>{
 	dispatch(addTodo(postText));
@@ -39,17 +41,19 @@ const CustomerList = props => (
 )
 
 class App extends Component{
-	submit(values){
+	handleSubmit(values){
 	    // Do something with the form values
 	    console.log(values);
-	  }
+	    return false;
+	}
 	render(){
 		// const {dispatch, visibleTodos, visibilityFilter,constMin,counter,customerList} = this.props
 		const {props} = this
 		console.log(this.props);
 		return (
 			<div>
-				<CusForm onSubmit = {this.submit} {...props.form}/>
+				<SimpleForm onSubmit ={this.handleSubmit}/>
+				<input type="text"/>
 				<hr/>
 				<CustomerTable cusData = {props.customer.cusData} dispatch ={props.dispatch}></CustomerTable>
 				{
@@ -139,7 +143,7 @@ function selectTodos(todos, filter) {
 // 基于全局 state ，哪些是我们想注入的 props ?
 // 注意：使用 https://github.com/reactjs/reselect 效果更佳。
 function select(state) {
-	 console.log(state);
+	console.log(state);
   return Object.assign({},state,{
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter,
@@ -154,4 +158,5 @@ function select(state) {
 
 
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
+
 export default connect(select)(App);

@@ -12,9 +12,9 @@ import { createAction } 				from 'redux-actions'
 
 
 
+
 const logger = createLogger();
 
-console.log(todoApp);
 let store = createStore(
 	todoApp,
 	applyMiddleware(promiseMiddleware,thunk,logger)
@@ -26,7 +26,7 @@ let next = store.dispatch;
 
 store.dispatch = function dispatchAndLog(action){
 	// console.log('dispatching',action);
-	// next(action);
+	next(action);
 	// console.log('next state',store.getState);
 }
 

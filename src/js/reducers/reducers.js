@@ -1,6 +1,6 @@
 
 
-import { combineReducers } 				from 'redux'
+import { createStore, combineReducers } 	from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form';
 
 
@@ -88,12 +88,12 @@ function getCostomerList(state = customerList,action){
 
 
 const todoApp = combineReducers({
+	form: reduxFormReducer,
 	visibilityFilter,
 	todos,
 	numText,
 	getCostomerList,
-	customer,
-	form:reduxFormReducer
+	customer
 })
 
 export default todoApp
