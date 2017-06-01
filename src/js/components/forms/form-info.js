@@ -1,5 +1,6 @@
 import React,{Component,PropTypes} from 'react'
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
 
 class SimpleForm extends Component{
@@ -8,7 +9,7 @@ class SimpleForm extends Component{
     
   }
   render(){
-      const { handleSubmit, pristine, reset, submitting } = this.props;
+      const { fields:{firstname,lastname,email,sex,favoriteColor,employed,note},handleSubmit, pristine, reset, submitting } = this.props;
       return (
         <form onSubmit={handleSubmit}>
           <div>
@@ -19,6 +20,7 @@ class SimpleForm extends Component{
                 component="input"
                 type="text"
                 placeholder="First Name"
+                {...firstname}
               />
             </div>
           </div>
@@ -30,6 +32,7 @@ class SimpleForm extends Component{
                 component="input"
                 type="text"
                 placeholder="Last Name"
+                {...lastname}
               />
             </div>
           </div>
@@ -41,6 +44,7 @@ class SimpleForm extends Component{
                 component="input"
                 type="email"
                 placeholder="Email"
+                {...email}
               />
             </div>
           </div>
@@ -48,12 +52,22 @@ class SimpleForm extends Component{
             <label>Sex</label>
             <div>
               <label>
-                <Field name="sex" component="input" type="radio" value="male" />
+                <Field name="sex" 
+                component="input" 
+                type="radio" 
+                value="male" 
+                {...sex}
+                />
                 {' '}
                 Male
               </label>
               <label>
-                <Field name="sex" component="input" type="radio" value="female" />
+                <Field name="sex" 
+                component="input" 
+                type="radio" 
+                value="female" 
+                {...sex}
+                />
                 {' '}
                 Female
               </label>
@@ -78,13 +92,16 @@ class SimpleForm extends Component{
                 id="employed"
                 component="input"
                 type="checkbox"
+                {...employed}
               />
             </div>
           </div>
           <div>
             <label>Notes</label>
             <div>
-              <Field name="notes" component="textarea" />
+              <Field name="notes" component="textarea" 
+              {...note}
+              />
             </div>
           </div>
           <div>
@@ -98,6 +115,29 @@ class SimpleForm extends Component{
     }
 }
 
-export default reduxForm({
+
+SimpleForm = reduxForm({
   form: 'simple', // a unique identifier for this form
+  fields:['firstname','lastname','email','sex','favoriteColor','employed','notes'],
 })(SimpleForm);
+
+
+
+
+
+SimpleForm = connect(
+  state => ({
+    initialValues: state.submitForm // pull initial values from account reducer
+  }),
+)(SimpleForm)
+
+
+
+export default SimpleForm
+
+
+
+
+
+
+

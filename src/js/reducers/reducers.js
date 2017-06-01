@@ -8,6 +8,9 @@ import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters,ADD_NUM
 const { SHOW_ALL } = VisibilityFilters
 
 import customer from './customer-table'
+import submitForm 	from './cus-form'
+
+
 
 function visibilityFilter(state = SHOW_ALL,action){
 	switch(action.type) {
@@ -93,7 +96,8 @@ const todoApp = combineReducers({
 	todos,
 	numText,
 	getCostomerList,
-	customer
+	customer,
+	submitForm
 })
 
 export default todoApp

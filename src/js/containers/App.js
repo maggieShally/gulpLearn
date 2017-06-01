@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 
 import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
+import { submit } from '../action/form-info'
 
 
 import AddTodo 			from '../components/AddTodo'
@@ -41,7 +42,7 @@ const CustomerList = props => (
 )
 
 class App extends Component{
-	handleSubmit(values){
+	submit(values){
 	    // Do something with the form values
 	    console.log(values);
 	    return false;
@@ -52,7 +53,7 @@ class App extends Component{
 		console.log(this.props);
 		return (
 			<div>
-				<SimpleForm onSubmit ={this.handleSubmit}/>
+				<SimpleForm onSubmit ={val => props.dispatch(submit(val))}/>
 				<input type="text"/>
 				<hr/>
 				<CustomerTable cusData = {props.customer.cusData} dispatch ={props.dispatch}></CustomerTable>
