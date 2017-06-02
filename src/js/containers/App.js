@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 
 import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
-import { submit } from '../action/form-info'
+import { submit } from '../action/cus-form'
 
 
 import AddTodo 			from '../components/AddTodo'
@@ -13,7 +13,7 @@ import TodoList 		from '../components/TodoList'
 import Footer 			from '../components/Footer'
 import CountNum 		from '../components/counter'
 import CustomerTable 	from '../components/customer-table/customer-table'
-import SimpleForm		from '../components/forms/form-info'
+import SimpleForm		from '../components/forms/cus-form'
 
 const fetchPost = postText =>(dispatch,getState)=>{
 	dispatch(addTodo(postText));

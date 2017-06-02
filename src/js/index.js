@@ -4,7 +4,7 @@ import { render } 						from 'react-dom'
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } 					from 'react-redux'
 import App 								from './containers/App'
-import todoApp 							from './reducers/reducers'
+import todoApp 							from './reducers/'
 import { createLogger } 				from 'redux-logger'
 import thunk 							from 'redux-thunk'
 import promiseMiddleware 				from 'redux-promise'
@@ -20,15 +20,15 @@ let store = createStore(
 	applyMiddleware(promiseMiddleware,thunk,logger)
 	);
 
-store.getState();
+console.log('store:'+JSON.stringify(store.getState()));
 
 let next = store.dispatch;
 
-store.dispatch = function dispatchAndLog(action){
-	// console.log('dispatching',action);
-	next(action);
-	// console.log('next state',store.getState);
-}
+// store.dispatch = function dispatchAndLog(action){
+// 	console.log('dispatching',action);
+// 	next(action);
+// 	console.log('next state',store.getState);
+// }
 
 var abc = {
 	test: '234'

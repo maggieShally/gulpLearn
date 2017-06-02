@@ -94,10 +94,10 @@ gulp.task('script:build',function(){
 })
 
 
-gulp.task('watch',['browserSync','sass'],function(){
+gulp.task('watch',['browserSync','sass','script:build'],function(){
 	gulp.watch('src/sass/*.scss',['sass']);
 	gulp.watch('src/pages/*.html');
-	gulp.watch('src/js/*.js');
+	gulp.watch('src/**/*.js',['script:build']);
 	gulp.watch('src/less/*.less',['testLess'])
 })
 

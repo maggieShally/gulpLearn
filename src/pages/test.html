@@ -35,6 +35,33 @@ thList.map((list,index)=>{
 })
 
 
+var todos = [
+	{
+		text: 'first',
+		completed: false
+	},
+	{
+		text: 'second',
+		completed: false
+	},
+	{
+		text: 'three',
+		completed: false
+	}
+]
+
+
+function mapTodo(){
+	return todos.map((todo,index)=>{
+	if(index == 2){
+		return (Object.assign({},todo,{completed: !todo.completed}))
+	}
+	return (todo) ;
+	})
+}
+
+
+
 </script>
 </body>
 </html>
