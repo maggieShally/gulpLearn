@@ -35838,6 +35838,113 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function formatName(user) {
+	return user.firstName + '' + user.lastName;
+}
+
+var user = {
+	firstName: 'Maggie',
+	lastName: 'Hu'
+};
+
+function getGreeting(user) {
+	if (user) {
+		return _react2.default.createElement(
+			'h1',
+			null,
+			'hello,',
+			formatName(user)
+		);
+	} else {
+		return _react2.default.createElement(
+			'h1',
+			null,
+			'hello .S tranger'
+		);
+	}
+}
+
+var element = function (_Component) {
+	_inherits(element, _Component);
+
+	function element(props) {
+		_classCallCheck(this, element);
+
+		var _this = _possibleConstructorReturn(this, (element.__proto__ || Object.getPrototypeOf(element)).call(this, props));
+
+		_this.state = {
+			date: new Date()
+		};
+		return _this;
+	}
+
+	_createClass(element, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				this.props.name,
+				getGreeting(user),
+				getGreeting(),
+				_react2.default.createElement(
+					'h2',
+					null,
+					'It is ',
+					this.state.date.toLocaleTimeString()
+				)
+			);
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			this.timerID = setInterval(function () {
+				return _this2.tick();
+			}, 1000);
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			clearInterval(this.timerID);
+			alert('componentWillUnmount');
+		}
+	}, {
+		key: 'tick',
+		value: function tick() {
+			this.setState({
+				date: new Date()
+			});
+		}
+	}]);
+
+	return element;
+}(_react.Component);
+
+exports.default = element;
+
+},{"react":377}],493:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -35875,6 +35982,10 @@ var _customerTable2 = _interopRequireDefault(_customerTable);
 var _formInfo2 = require('../components/forms/form-info');
 
 var _formInfo3 = _interopRequireDefault(_formInfo2);
+
+var _test = require('../components/test');
+
+var _test2 = _interopRequireDefault(_test);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35937,10 +36048,16 @@ var CustomerList = function CustomerList(props) {
 var App = function (_Component) {
 	_inherits(App, _Component);
 
-	function App() {
+	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+		_this.changeType = _this.changeType.bind(_this);
+		_this.state = {
+			type: 1
+		};
+		return _this;
 	}
 
 	_createClass(App, [{
@@ -35960,6 +36077,14 @@ var App = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
+				this.state.type == 1 ? _react2.default.createElement(_test2.default, {
+					name: 'this is my name'
+				}) : '',
+				_react2.default.createElement(
+					'button',
+					{ type: 'button', onClick: this.changeType },
+					'changeType'
+				),
 				_react2.default.createElement(_formInfo3.default, { onSubmit: function onSubmit(val) {
 						return props.dispatch((0, _formInfo.submit)(val));
 					} }),
@@ -36034,6 +36159,13 @@ var App = function (_Component) {
 		value: function componentDidMount() {
 			this.props.dispatch((0, _actions.getTempList)());
 		}
+	}, {
+		key: 'changeType',
+		value: function changeType() {
+			this.setState({
+				type: 2
+			});
+		}
 	}]);
 
 	return App;
@@ -36081,7 +36213,7 @@ function select(state) {
 
 exports.default = (0, _reactRedux.connect)(select)(App);
 
-},{"../action/actions":482,"../action/form-info":484,"../components/AddTodo":485,"../components/Footer":486,"../components/TodoList":488,"../components/counter":489,"../components/customer-table/customer-table":490,"../components/forms/form-info":491,"react":377,"react-dom":211,"react-redux":346,"redux":477,"redux-form":432}],493:[function(require,module,exports){
+},{"../action/actions":482,"../action/form-info":484,"../components/AddTodo":485,"../components/Footer":486,"../components/TodoList":488,"../components/counter":489,"../components/customer-table/customer-table":490,"../components/forms/form-info":491,"../components/test":492,"react":377,"react-dom":211,"react-redux":346,"redux":477,"redux-form":432}],494:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -36147,7 +36279,7 @@ var rootElement = document.getElementById('reApp');
 	_react2.default.createElement(_App2.default, null)
 ), rootElement);
 
-},{"./containers/App":492,"./reducers/reducers":496,"react":377,"react-dom":211,"react-redux":346,"redux":477,"redux-actions":386,"redux-logger":469,"redux-promise":470,"redux-thunk":471}],494:[function(require,module,exports){
+},{"./containers/App":493,"./reducers/reducers":497,"react":377,"react-dom":211,"react-redux":346,"redux":477,"redux-actions":386,"redux-logger":469,"redux-promise":470,"redux-thunk":471}],495:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36181,7 +36313,7 @@ function submitForm() {
   }
 }
 
-},{"../action/form-info":484}],495:[function(require,module,exports){
+},{"../action/form-info":484}],496:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36229,7 +36361,7 @@ function cusMain() {
 	}
 }
 
-},{"../action/customer-tables":483,"redux":477}],496:[function(require,module,exports){
+},{"../action/customer-tables":483,"redux":477}],497:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36346,4 +36478,4 @@ var todoApp = (0, _redux.combineReducers)({
 
 exports.default = todoApp;
 
-},{"../action/actions.js":482,"./cus-form":494,"./customer-table":495,"redux":477,"redux-form":432}]},{},[493]);
+},{"../action/actions.js":482,"./cus-form":495,"./customer-table":496,"redux":477,"redux-form":432}]},{},[494]);
