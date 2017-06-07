@@ -90,7 +90,7 @@ gulp.task('script:build',function(){
 		})
 		.bundle()
 		.pipe(source('bundle2.js'))
-		.pipe(gulp.dest('src/js'))
+		.pipe(gulp.dest('src/js/build'))
 })
 
 

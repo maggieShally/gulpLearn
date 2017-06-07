@@ -1,4 +1,4 @@
-import { SUBMIT_SUCCESS } from '../action/form-info'
+import { SUBMIT_SUCCESS } from '../action/cus-form'
 
 
 const initForm = {
