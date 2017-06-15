@@ -35821,6 +35821,8 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -35923,8 +35925,76 @@ var CustomerList = function CustomerList(props) {
 	);
 };
 
-var App = function (_Component) {
-	_inherits(App, _Component);
+var SearchForm = function (_Component) {
+	_inherits(SearchForm, _Component);
+
+	function SearchForm(props) {
+		_classCallCheck(this, SearchForm);
+
+		return _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
+	}
+
+	_createClass(SearchForm, [{
+		key: 'render',
+		value: function render() {
+			var _props$fields = this.props.fields,
+			    keywords = _props$fields.keywords,
+			    sex = _props$fields.sex;
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement('input', _extends({ type: 'text', placeholder: 'keywords' }, keywords))
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'select',
+						_extends({ name: '', id: '' }, sex),
+						_react2.default.createElement(
+							'option',
+							{ value: '-1' },
+							'\u8BF7\u9009\u62E9'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: '1' },
+							'\u7537'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: '2' },
+							'\u5973'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'button',
+						{ type: 'button' },
+						'search'
+					)
+				)
+			);
+		}
+	}]);
+
+	return SearchForm;
+}(_react.Component);
+
+SearchForm = (0, _reduxForm.reduxForm)({
+	form: 'SearchForm', // a unique identifier for this form
+	fields: ['keywords', 'sex']
+})(SearchForm);
+
+var App = function (_Component2) {
+	_inherits(App, _Component2);
 
 	function App() {
 		_classCallCheck(this, App);
@@ -35949,6 +36019,8 @@ var App = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
+				_react2.default.createElement(SearchForm, null),
+				_react2.default.createElement('hr', null),
 				_react2.default.createElement(_cusForm3.default, { onSubmit: function onSubmit(val) {
 						return props.dispatch((0, _cusForm.submit)(val));
 					} }),
@@ -36140,34 +36212,35 @@ var rootElement = document.getElementById('reApp');
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.default = submitForm;
 
 var _cusForm = require('../action/cus-form');
 
-var initForm = {
-  // used to populate "account" reducer when "Load" is clicked
-  firstName: 'Jane',
-  lastName: 'Doe',
-  sex: 'male',
-  employed: true,
-  email: 'langling10@163.com',
-  favoriteColor: 'ff0000',
-  notes: 'Born to write amazing Redux code.'
-};
+// const initForm = {
+//   // used to populate "account" reducer when "Load" is clicked
+//   firstName: 'Jane',
+//   lastName: 'Doe',
+//   sex: 'male',
+//   employed: true,
+//   email: 'langling10@163.com',
+//   favoriteColor: 'ff0000',
+//   notes: 'Born to write amazing Redux code.',
+// };
+
 
 function submitForm() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initForm;
-  var action = arguments[1];
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	var action = arguments[1];
 
-  switch (action.type) {
-    case _cusForm.SUBMIT_SUCCESS:
-      alert('success');
-      return state;
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case _cusForm.SUBMIT_SUCCESS:
+			alert('success');
+			return state;
+		default:
+			return state;
+	}
 }
 
 },{"../action/cus-form":483}],495:[function(require,module,exports){
@@ -36242,6 +36315,7 @@ var _cusForm2 = _interopRequireDefault(_cusForm);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+// import { reducer as reduxFormReducer } from 'redux-form';
 
 var SHOW_ALL = _actions.VisibilityFilters.SHOW_ALL;
 
@@ -36324,7 +36398,6 @@ function getCostomerList() {
 }
 
 var todoApp = (0, _redux.combineReducers)({
-	form: _reduxForm.reducer,
 	visibilityFilter: visibilityFilter,
 	todos: todos,
 	numText: numText,

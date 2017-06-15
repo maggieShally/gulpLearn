@@ -2,7 +2,7 @@ import React,{Component,PropTypes} from 'react'
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { reducer as reduxFormReducer ,reduxForm} from 'redux-form';
 
 import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
 import { submit } from '../action/cus-form'
@@ -41,6 +41,53 @@ const CustomerList = props => (
 		</div>
 )
 
+
+
+class SearchForm extends Component{
+	constructor(props){
+		super(props)
+	}
+	render(){
+		const {
+			fields:{
+				keywords,
+				sex
+			}
+		} = this.props;
+		return(
+			<div>
+				<div>
+					<input type="text" placeholder="keywords" {...keywords}
+					/>
+				</div>
+				<div>
+					<select name="" id="" {...sex}>
+						<option value="-1">请选择</option>
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</div>
+				<div>
+					<button type="button">search</button>
+				</div>
+			</div>
+
+
+		)
+	}
+}
+
+
+SearchForm = reduxForm({
+  form: 'SearchForm', // a unique identifier for this form
+  fields:[
+  	'keywords',
+  	'sex'
+  ],
+})(SearchForm);
+
+
+
 class App extends Component{
 	submit(values){
 	    // Do something with the form values
@@ -53,6 +100,8 @@ class App extends Component{
 		console.log(this.props);
 		return (
 			<div>
+				<SearchForm></SearchForm>
+				<hr/>
 				<SimpleForm onSubmit ={val => props.dispatch(submit(val))}/>
 				<input type="text"/>
 				<hr/>

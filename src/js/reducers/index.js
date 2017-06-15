@@ -1,8 +1,9 @@
 
 
 import { createStore, combineReducers } 	from 'redux'
-import { reducer as reduxFormReducer } from 'redux-form';
+// import { reducer as reduxFormReducer } from 'redux-form';
 
+import { reducer as form } from 'redux-form'
 
 import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters,ADD_NUM,REDUCE_NUM ,GET_CUSTOMER_LIST} from '../action/actions.js'
 const { SHOW_ALL } = VisibilityFilters
@@ -91,7 +92,6 @@ function getCostomerList(state = customerList,action){
 
 
 const todoApp = combineReducers({
-	form: reduxFormReducer,
 	visibilityFilter,
 	todos,
 	numText,
