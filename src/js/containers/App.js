@@ -13,6 +13,7 @@ import TodoList 		from '../components/TodoList'
 import Footer 			from '../components/Footer'
 import CountNum 		from '../components/counter'
 import CustomerTable 	from '../components/customer-table/customer-table'
+import Test 			from '../components/test'
 import SimpleForm		from '../components/forms/cus-form'
 
 const fetchPost = postText =>(dispatch,getState)=>{
@@ -90,6 +91,13 @@ SearchForm = reduxForm({
 
 
 class App extends Component{
+	constructor(props){
+		super(props);
+		this.changeType = this.changeType.bind(this);
+		this.state = {
+			type: 1
+		}
+	}
 	submit(values){
 	    // Do something with the form values
 	    console.log(values);
@@ -101,8 +109,18 @@ class App extends Component{
 		console.log(this.props);
 		return (
 			<div>
+<<<<<<< HEAD
 				<SearchForm></SearchForm>
 				<hr/>
+=======
+				{
+					this.state.type == 1?
+					<Test 
+				name="this is my name"
+				></Test> : ''
+				}
+				<button type="button" onClick={this.changeType}>changeType</button>
+>>>>>>> fa15f06e5b925eb9c07552e257ec44d08292b9bc
 				<SimpleForm onSubmit ={val => props.dispatch(submit(val))}/>
 				<input type="text"/>
 				<hr/>
@@ -174,6 +192,11 @@ class App extends Component{
 		// 	  notes: 'Born to write amazing Redux code.',
 		// }
 		// this.props.dispatch(getCustomInfo(data));
+	}
+	changeType(){
+		this.setState({
+			type: 2
+		})
 	}
 }
 

@@ -93,7 +93,11 @@ gulp.task('script:build',function(){
 		})
 		.bundle()
 		.pipe(source('bundle2.js'))
+<<<<<<< HEAD
 		.pipe(gulp.dest('src/js/js'))
+=======
+		.pipe(gulp.dest('src/js/build'))
+>>>>>>> fa15f06e5b925eb9c07552e257ec44d08292b9bc
 })
 
 
