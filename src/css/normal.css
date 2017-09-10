@@ -5,5 +5,17 @@
   background-color: #ddd;
   font-size: 18px; }
 
+.mainWrapper .nav {
+  padding: 30px 0;
+  border-bottom: 1px solid #ccc; }
+  .mainWrapper .nav li {
+    display: inline-block;
+    padding: 0 30px; }
+    .mainWrapper .nav li a {
+      color: #666;
+      text-decoration: none; }
+      .mainWrapper .nav li a.selected {
+        color: #5F9F9F; }
+
 .content {
-  color: #adeded; }
+  padding: 30px 0; }

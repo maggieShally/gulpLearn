@@ -17,6 +17,9 @@ var babelify	= require('babelify');//babel配合browserify需安装babelify
 var source		= require('vinyl-source-stream');//vinyl-source-stream用于将Browserify的bundle()的输出转换为Gulp可用的[vinyl][]（一种虚拟文件格式）流
 var babel   	= require('gulp-babel');
 
+// var webpack 	= require('webpack');
+
+
 gulp.task('testLess',function(){
 	gulp.src(['src/less/*.less'])
 		.pipe(less())
@@ -90,7 +93,7 @@ gulp.task('script:build',function(){
 		})
 		.bundle()
 		.pipe(source('bundle2.js'))
-		.pipe(gulp.dest('src/js'))
+		.pipe(gulp.dest('src/js/js'))
 })
 
 
@@ -123,6 +126,18 @@ gulp.task('build',function(callback){
 		)
 	console.log('****************building files****************');
 })
+
+
+//gulp --product
+//
+// gulp.task('webpack',function(){
+// 	isProduct  = argv.product;
+// 	isWatch = !isProduct;
+// 	console.log('正在处理：'+( isProduct ? '线上' : '本地') + '环境');
+// 	fse.emptydirSync();
+// 	gulp.start('webpack')
+// })
+
 
 gulp.task('default',function(callback){
 	runSequence(['sass','browserSync','watch','sprite','script:build'],callback)

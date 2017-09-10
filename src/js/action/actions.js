@@ -6,6 +6,8 @@ export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const ADD_NUM = 'ADD_NUM';
 export const REDUCE_NUM = 'REDUCE_NUM';
 
+export const SEARCH_FROM = 'SEARCH_FROM';
+
 export const VisibilityFilters = {
 	SHOW_ALL: 'SHOW_ALL',
 	SHOW_COMPLETED: 'SHOW_COMPLETED',
@@ -51,7 +53,6 @@ export function reduceNum(val){
  		type : SET_VISIBILITY_FILTER,filter
  	}
  }
-
 
  export const GET_CUSTOMER_LIST = 'GET_CUSTOMER_LIST'
 

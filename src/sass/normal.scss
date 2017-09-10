@@ -9,6 +9,25 @@ $defaultColor :#ccc;
 	font-size: 18px;
 }
 
+.mainWrapper {
+	.nav {
+		padding: 30px 0;
+		border-bottom: 1px solid #ccc;
+		li {
+			display: inline-block;
+			padding: 0 30px;
+
+			a {
+				color: #666;
+				text-decoration: none;
+				&.selected {
+					color: #5F9F9F;
+				}
+			}
+		}
+	}
+}
+
 .content {
-	color: #adeded;
+	padding: 30px 0;
 }

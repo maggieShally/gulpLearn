@@ -2,10 +2,10 @@ import React,{Component,PropTypes} from 'react'
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reducer as reduxFormReducer ,reduxForm} from 'redux-form';
+import { reduxForm} from 'redux-form';
 
 import { addTodo,toggleTodo,setVisibilityFilter,VisibilityFilters,addNum,reduceNum,getTempList} from '../action/actions'
-import { submit } from '../action/cus-form'
+import { submit,getCustomInfo } from '../action/cus-form'
 
 
 import AddTodo 			from '../components/AddTodo'
@@ -71,21 +71,22 @@ class SearchForm extends Component{
 					<button type="button">search</button>
 				</div>
 			</div>
-
-
 		)
 	}
 }
 
 
 SearchForm = reduxForm({
-  form: 'SearchForm', // a unique identifier for this form
+  form: 'search_form', // a unique identifier for this form
   fields:[
   	'keywords',
   	'sex'
   ],
+},state=>{
+	return {
+		initialValues: state.searchFormData
+	}
 })(SearchForm);
-
 
 
 class App extends Component{
@@ -163,6 +164,16 @@ class App extends Component{
 	}
 	componentDidMount(){
 		this.props.dispatch(getTempList());
+		// const data = {
+		// 	firstName: 'Jane',
+		// 	  lastName: 'Doe',
+		// 	  sex: 'male',
+		// 	  employed: true,
+		// 	  email: 'langling10@163.com',
+		// 	  favoriteColor: 'ff0000',
+		// 	  notes: 'Born to write amazing Redux code.',
+		// }
+		// this.props.dispatch(getCustomInfo(data));
 	}
 }
 
