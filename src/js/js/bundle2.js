@@ -41293,6 +41293,24 @@ var Main = function (_Component) {
 							{ to: '/form', activeClassName: 'selected' },
 							'form'
 						)
+					),
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.NavLink,
+							{ to: '/fieldArraysform', activeClassName: 'selected' },
+							'fieldArraysform'
+						)
+					),
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.NavLink,
+							{ to: '/orderForm', activeClassName: 'selected' },
+							'orderForm'
+						)
 					)
 				),
 				_react2.default.createElement(
@@ -41938,6 +41956,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -41958,31 +41978,131 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var data = {
-  firstName: 'Janesss',
-  lastName: 'Doe',
-  sex: 'male',
-  employed: true,
-  email: 'langling10@163.com',
-  favoriteColor: 'ff0000',
-  notes: 'Born to write amazing Redux code.'
+var MyCount = function (_Component) {
+  _inherits(MyCount, _Component);
+
+  function MyCount() {
+    _classCallCheck(this, MyCount);
+
+    return _possibleConstructorReturn(this, (MyCount.__proto__ || Object.getPrototypeOf(MyCount)).apply(this, arguments));
+  }
+
+  _createClass(MyCount, [{
+    key: 'render',
+    value: function render() {
+      var _props$input = this.props.input,
+          value = _props$input.value,
+          onChange = _props$input.onChange;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          null,
+          'the current value is ',
+          value
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'button', onClick: function onClick() {
+              return onChange(value + 1);
+            } },
+          'Inc'
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'button', onClick: function onClick() {
+              return onChange(value - 1);
+            } },
+          'Dec'
+        )
+      );
+    }
+  }]);
+
+  return MyCount;
+}(_react.Component);
+
+var renderField = function renderField(_ref) {
+  var input = _ref.input,
+      label = _ref.label,
+      type = _ref.type,
+      _ref$meta = _ref.meta,
+      touched = _ref$meta.touched,
+      error = _ref$meta.error,
+      warning = _ref$meta.warning;
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'label',
+      null,
+      label
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement('input', _extends({ type: type, placeholder: label }, input)),
+      touched && (error && _react2.default.createElement(
+        'span',
+        null,
+        error
+      ) || warning && _react2.default.createElement(
+        'span',
+        null,
+        warning
+      ))
+    )
+  );
 };
 
-var UserForm = function (_Component) {
-  _inherits(UserForm, _Component);
+var renderHobbies = function renderHobbies(_ref2) {
+  var fields = _ref2.fields;
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'ul',
+      null,
+      fields.map(function (name, index) {
+        return _react2.default.createElement(
+          'li',
+          { key: index },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: name },
+            'hobby #',
+            index + 1
+          ),
+          _react2.default.createElement(_reduxForm.Field, { name: name, type: 'text', component: 'input' })
+        );
+      })
+    )
+  );
+};
+
+var sleep = function sleep(ms) {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, ms);
+  });
+};
+
+var UserForm = function (_Component2) {
+  _inherits(UserForm, _Component2);
 
   function UserForm(props) {
     _classCallCheck(this, UserForm);
 
-    var _this = _possibleConstructorReturn(this, (UserForm.__proto__ || Object.getPrototypeOf(UserForm)).call(this, props));
+    var _this2 = _possibleConstructorReturn(this, (UserForm.__proto__ || Object.getPrototypeOf(UserForm)).call(this, props));
 
-    _this.componentDidMount = _this.componentDidMount.bind(_this);
-    _this.initForm = _this.initForm.bind(_this);
-    _this.state = {
+    _this2.componentDidMount = _this2.componentDidMount.bind(_this2);
+    _this2.initForm = _this2.initForm.bind(_this2);
+    _this2.state = {
       showInfo: false,
       formData: {}
     };
-    return _this;
+    return _this2;
   }
 
   _createClass(UserForm, [{
@@ -41993,42 +42113,37 @@ var UserForm = function (_Component) {
           handleSubmit = _props.handleSubmit,
           pristine = _props.pristine,
           reset = _props.reset,
-          submitting = _props.submitting;
+          submitting = _props.submitting,
+          hasEmailValue = _props.hasEmailValue;
       var _state = this.state,
           showInfo = _state.showInfo,
           formData = _state.formData;
 
+
+      var upper = function upper(value) {
+        return value && value.toUpperCase();
+      };
+
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'button',
-          { type: 'button', onClick: function onClick() {
-              return load(data);
-            } },
-          'getInfo'
-        ),
         _react2.default.createElement(
           'form',
           { onSubmit: handleSubmit(this.getDetails.bind(this)) },
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-              'label',
-              null,
-              'First Name'
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(_reduxForm.Field, {
-                name: 'firstName',
-                component: 'input',
-                type: 'text',
-                placeholder: 'First Name'
-              })
-            )
+            _react2.default.createElement(_reduxForm.Field, { name: 'count', component: MyCount })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_reduxForm.Field, { label: 'First Name', name: 'firstName', component: renderField, type: 'text', placeholder: 'First Name', normalize: upper })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_reduxForm.Field, { label: 'age', name: 'age', component: renderField, type: 'text', placeholder: 'age' })
           ),
           _react2.default.createElement(
             'div',
@@ -42041,15 +42156,15 @@ var UserForm = function (_Component) {
             _react2.default.createElement(
               'div',
               null,
-              _react2.default.createElement(_reduxForm.Field, {
-                name: 'lastName',
-                component: 'input',
-                type: 'text',
-                placeholder: 'Last Name'
-              })
+              _react2.default.createElement(_reduxForm.Field, { name: 'lastName', component: 'input', type: 'text', placeholder: 'Last Name' })
             )
           ),
           _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_reduxForm.Field, { name: 'hasEmail', label: 'hasEmail', type: 'checkbox', component: renderField })
+          ),
+          hasEmailValue && _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement(
@@ -42060,12 +42175,7 @@ var UserForm = function (_Component) {
             _react2.default.createElement(
               'div',
               null,
-              _react2.default.createElement(_reduxForm.Field, {
-                name: 'email',
-                component: 'input',
-                type: 'email',
-                placeholder: 'Email'
-              })
+              _react2.default.createElement(_reduxForm.Field, { name: 'email', component: 'input', type: 'email', placeholder: 'Email' })
             )
           ),
           _react2.default.createElement(
@@ -42082,24 +42192,18 @@ var UserForm = function (_Component) {
               _react2.default.createElement(
                 'label',
                 null,
-                _react2.default.createElement(_reduxForm.Field, { name: 'sex',
-                  component: 'input',
-                  type: 'radio',
-                  value: 'male'
-                }),
+                _react2.default.createElement(_reduxForm.Field, { name: 'sex', component: 'input', type: 'radio', value: 'male' }),
                 ' ',
-                'Male'
+                ' ',
+                '  Male'
               ),
               _react2.default.createElement(
                 'label',
                 null,
-                _react2.default.createElement(_reduxForm.Field, { name: 'sex',
-                  component: 'input',
-                  type: 'radio',
-                  value: 'female'
-                }),
+                _react2.default.createElement(_reduxForm.Field, { name: 'sex', component: 'input', type: 'radio', value: 'female' }),
+                '     ',
                 ' ',
-                'Female'
+                '    Female'
               )
             )
           ),
@@ -42148,10 +42252,21 @@ var UserForm = function (_Component) {
               'div',
               null,
               _react2.default.createElement(_reduxForm.Field, {
-                name: 'employed',
-                id: 'employed',
-                component: 'input',
-                type: 'checkbox'
+                name: 'employed', id: 'employed', component: 'input', type: 'checkbox' })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Nosssstes'
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(_reduxForm.Field, { name: 'notes', component: 'textarea'
               })
             )
           ),
@@ -42161,13 +42276,12 @@ var UserForm = function (_Component) {
             _react2.default.createElement(
               'label',
               null,
-              'Notes'
+              'hobby'
             ),
             _react2.default.createElement(
               'div',
               null,
-              _react2.default.createElement(_reduxForm.Field, { name: 'notes', component: 'textarea'
-              })
+              _react2.default.createElement(_reduxForm.FieldArray, { name: 'hoddies', component: renderHobbies })
             )
           ),
           _react2.default.createElement(
@@ -42192,7 +42306,17 @@ var UserForm = function (_Component) {
   }, {
     key: 'getDetails',
     value: function getDetails(values) {
-      console.log(values);
+      return sleep(100).then(function () {
+        if (!['JOHN', 'PAUL'].includes(values.firstName)) {
+          throw new _reduxForm.SubmissionError({
+            firstName: 'user dones not exist',
+            _error: 'Login failed'
+          });
+        } else {
+          console.log('submit', JSON.stringify(values, null, 2));
+        }
+      });
+
       this.setState({
         showInfo: true,
         formData: values
@@ -42205,10 +42329,12 @@ var UserForm = function (_Component) {
         firstName: 'Janesss',
         lastName: 'Doe',
         sex: 'male',
+        count: 0,
         employed: true,
         email: 'langling10@163.com',
         favoriteColor: 'ff0000',
-        notes: 'Born to write amazing Redux code.'
+        notes: 'Born to write amazing Redux code.',
+        hoddies: ['sings', 'dancingsssssssssss']
       };
       this.props.dispatch((0, _cusForm.getCustomInfo)(data));
     }
@@ -42218,15 +42344,15 @@ var UserForm = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      // this.initForm();
+      this.initForm();
     }
   }]);
 
   return UserForm;
 }(_react.Component);
 
-var FormInfo = function (_Component2) {
-  _inherits(FormInfo, _Component2);
+var FormInfo = function (_Component3) {
+  _inherits(FormInfo, _Component3);
 
   function FormInfo(props) {
     _classCallCheck(this, FormInfo);
@@ -42261,21 +42387,491 @@ var FormInfo = function (_Component2) {
   return FormInfo;
 }(_react.Component);
 
+var validate = function validate(values) {
+  var errors = {};
+  if (!values.firstName) {
+    errors.firstName = 'Required';
+  }
+  if (!values.age) {
+    errors.age = 'required';
+  } else if (isNaN(Number(values.age))) {
+    errors.age = 'must be a number';
+  }
+  console.log('errors', errors);
+  return errors;
+};
+
+var filedChange = function filedChange(values, dispatch, props) {
+  console.log('values:', values);
+};
+
 UserForm = (0, _reduxForm.reduxForm)({
   form: 'UserForm',
-  enableReinitialize: true
+  enableReinitialize: true,
+  validate: validate,
+  onChange: filedChange
 })(UserForm);
 
-UserForm = (0, _reactRedux.connect)(function (state) {
-  return {
-    initialValues: state.submitForm // pull initial values from account reducer
+var selector = (0, _reduxForm.formValueSelector)('UserForm');
 
+UserForm = (0, _reactRedux.connect)(function (state) {
+  var hasEmailValue = selector(state, 'hasEmail');
+
+  return {
+    hasEmailValue: hasEmailValue,
+    initialValues: state.submitForm // pull initial values from account reducer
   };
 }, { load: _cusForm.getCustomInfo })(UserForm);
 
 exports.default = UserForm;
 
 },{"../../action/cus-form":572,"react":476,"react-redux":226,"redux-form":531}],582:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reduxForm = require('redux-form');
+
+var _reactRedux = require('react-redux');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var renderField = function renderField(_ref) {
+	var input = _ref.input,
+	    label = _ref.label,
+	    type = _ref.type,
+	    _ref$meta = _ref.meta,
+	    touched = _ref$meta.touched,
+	    error = _ref$meta.error;
+	return _react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(
+			'lable',
+			null,
+			label
+		),
+		_react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement('input', _extends({ type: type }, input, { placeholder: label })),
+			touched && error && _react2.default.createElement(
+				'span',
+				{ className: 'error' },
+				error
+			)
+		)
+	);
+};
+
+var renderHobbies = function renderHobbies(_ref2) {
+	var fields = _ref2.fields,
+	    error = _ref2.meta.error;
+	return _react2.default.createElement(
+		'ul',
+		{ className: 'fieldBox' },
+		_react2.default.createElement(
+			'li',
+			null,
+			_react2.default.createElement(
+				'button',
+				{ type: 'button', onClick: function onClick() {
+						return fields.push();
+					} },
+				' ++ Add Hobbies '
+			)
+		),
+		fields.map(function (hobby, index) {
+			return _react2.default.createElement(
+				'li',
+				{ key: index },
+				_react2.default.createElement(
+					'button',
+					{ className: 'fildDelet', type: 'button', onClick: function onClick() {
+							return fields.remove(index);
+						} },
+					'remove'
+				),
+				_react2.default.createElement(_reduxForm.Field, {
+					name: hobby,
+					type: 'text',
+					component: renderField,
+					label: 'Hobby ' + (index + 1)
+				})
+			);
+		}),
+		error && _react2.default.createElement(
+			'li',
+			{ className: 'error' },
+			error
+		)
+	);
+};
+
+var renderMembers = function renderMembers(_ref3) {
+	var fields = _ref3.fields,
+	    _ref3$meta = _ref3.meta,
+	    error = _ref3$meta.error,
+	    submitFailed = _ref3$meta.submitFailed;
+	return _react2.default.createElement(
+		'ul',
+		{ className: 'fieldBox' },
+		_react2.default.createElement(
+			'li',
+			null,
+			_react2.default.createElement(
+				'button',
+				{ type: 'button', onClick: function onClick() {
+						return fields.push({});
+					} },
+				'Add Member'
+			),
+			submitFailed && error && _react2.default.createElement(
+				'span',
+				{ className: 'error' },
+				error
+			)
+		),
+		fields.map(function (member, index) {
+			return _react2.default.createElement(
+				'li',
+				{ key: index },
+				_react2.default.createElement(
+					'button',
+					{ type: 'button', className: 'fildDelet', onClick: function onClick() {
+							return fields.remove(index);
+						} },
+					'Remove ',
+					index
+				),
+				_react2.default.createElement(
+					'h4',
+					null,
+					'member #',
+					index + 1
+				),
+				_react2.default.createElement(_reduxForm.Field, {
+					name: member + '.firstName',
+					type: 'text',
+					component: renderField,
+					label: 'First Name'
+				}),
+				_react2.default.createElement(_reduxForm.Field, {
+					name: member + '.lastName',
+					type: 'text',
+					component: renderField,
+					label: 'Last Name'
+				}),
+				_react2.default.createElement(_reduxForm.FieldArray, {
+					name: member + '.hobbies',
+					component: renderHobbies
+				})
+			);
+		})
+	);
+};
+
+var FieldArraysForm = function (_Component) {
+	_inherits(FieldArraysForm, _Component);
+
+	function FieldArraysForm(props) {
+		_classCallCheck(this, FieldArraysForm);
+
+		var _this = _possibleConstructorReturn(this, (FieldArraysForm.__proto__ || Object.getPrototypeOf(FieldArraysForm)).call(this, props));
+
+		_this.getValues = _this.getValues.bind(_this);
+		return _this;
+	}
+
+	_createClass(FieldArraysForm, [{
+		key: 'render',
+		value: function render() {
+			var _props = this.props,
+			    handleSubmit = _props.handleSubmit,
+			    pristine = _props.pristine,
+			    reset = _props.reset,
+			    submitting = _props.submitting;
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'form',
+					{ onSubmit: handleSubmit(this.getValues) },
+					_react2.default.createElement(_reduxForm.Field, {
+						name: 'clubName',
+						type: 'text',
+						label: 'Club Name',
+						component: renderField
+					}),
+					_react2.default.createElement(_reduxForm.FieldArray, { name: 'members', component: renderMembers }),
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', disabled: submitting },
+							'Submit'
+						),
+						_react2.default.createElement(
+							'button',
+							{ type: 'button', disabled: pristine || submitting, onClick: reset },
+							'Clear Values'
+						)
+					)
+				)
+			);
+		}
+	}, {
+		key: 'getValues',
+		value: function getValues(values) {
+			console.log('values', values);
+		}
+	}]);
+
+	return FieldArraysForm;
+}(_react.Component);
+
+var validate = function validate(values) {
+	var errors = {};
+	if (!values.clubName) {
+		errors.clubName = 'required';
+	}
+	if (!values.members || !values.members.length) {
+		errors.members = { _error: 'At least one member must be entered' };
+	} else {
+		var membersArrayErrors = [];
+		values.members.forEach(function (member, memberIndex) {
+
+			var memberErrors = {};
+			if (!member || !member.firstName) {
+				memberErrors.firstName = 'required';
+				membersArrayErrors[memberIndex] = memberErrors;
+			}
+			if (!member || !member.lastName) {
+				memberErrors.lastName = 'required';
+				membersArrayErrors[memberIndex] = memberErrors;
+			}
+			if (member && member.hobbies && member.hobbies.length) {
+				var hobbyArrayErrors = [];
+				member.hobbies.forEach(function (bobby, bobbyIndex) {
+					if (!bobby || !bobby.length) {
+						hobbyArrayErrors[bobbyIndex] = 'required';
+					}
+				});
+
+				if (hobbyArrayErrors.length) {
+					memberErrors.hobbies = hobbyArrayErrors;
+					membersArrayErrors[memberIndex] = memberErrors;
+				}
+			}
+		});
+
+		if (membersArrayErrors.length) {
+			errors.members = membersArrayErrors;
+		}
+	}
+	console.log('errors', errors);
+	return errors;
+};
+
+FieldArraysForm = (0, _reduxForm.reduxForm)({
+	form: 'fieldsArrays',
+	validate: validate
+})(FieldArraysForm);
+
+exports.default = FieldArraysForm;
+
+},{"react":476,"react-redux":226,"redux-form":531}],583:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _reduxForm = require('redux-form');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var renderField = function renderField(_ref) {
+	var input = _ref.input,
+	    label = _ref.label,
+	    type = _ref.type;
+	return _react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(
+			'label',
+			null,
+			label,
+			' : '
+		),
+		_react2.default.createElement('input', _extends({ type: type }, input, { placeholder: label }))
+	);
+};
+
+var Address = function (_Component) {
+	_inherits(Address, _Component);
+
+	function Address() {
+		_classCallCheck(this, Address);
+
+		return _possibleConstructorReturn(this, (Address.__proto__ || Object.getPrototypeOf(Address)).apply(this, arguments));
+	}
+
+	_createClass(Address, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_reduxForm.Field, { name: 'streetName', component: renderField, type: 'text', label: '\u8857\u9053\u540D' }),
+				_react2.default.createElement(_reduxForm.Field, { name: 'number', component: renderField, label: '\u95E8\u724C\u53F7', type: 'text' }),
+				_react2.default.createElement(_reduxForm.Field, { name: 'zipCode', component: renderField, label: '\u90AE\u653F\u7F16\u7801', type: 'text' })
+			);
+		}
+	}]);
+
+	return Address;
+}(_react.Component);
+
+var Party = function (_Component2) {
+	_inherits(Party, _Component2);
+
+	function Party() {
+		_classCallCheck(this, Party);
+
+		return _possibleConstructorReturn(this, (Party.__proto__ || Object.getPrototypeOf(Party)).apply(this, arguments));
+	}
+
+	_createClass(Party, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_reduxForm.Field, { name: 'givenName', component: renderField, type: 'text', label: '\u540D\u5B57' }),
+				_react2.default.createElement(_reduxForm.Field, { name: 'middleName', component: renderField, type: 'text', label: '\u4E2D\u95F4\u540D' }),
+				_react2.default.createElement(_reduxForm.Field, { name: 'surname', component: renderField, type: 'text', label: '\u59D3\u6C0F' }),
+				_react2.default.createElement(
+					_reduxForm.FormSection,
+					{ name: 'address' },
+					_react2.default.createElement(Address, null)
+				)
+			);
+		}
+	}]);
+
+	return Party;
+}(_react.Component);
+
+var OrderForm = function (_Component3) {
+	_inherits(OrderForm, _Component3);
+
+	function OrderForm() {
+		_classCallCheck(this, OrderForm);
+
+		return _possibleConstructorReturn(this, (OrderForm.__proto__ || Object.getPrototypeOf(OrderForm)).apply(this, arguments));
+	}
+
+	_createClass(OrderForm, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'form',
+				null,
+				_react2.default.createElement(
+					'h2',
+					null,
+					'\u8D2D\u4E70\u4EBA\uFF1A'
+				),
+				_react2.default.createElement(
+					_reduxForm.FormSection,
+					{ name: 'buyer' },
+					_react2.default.createElement(Party, null)
+				),
+				_react2.default.createElement(
+					'h2',
+					null,
+					'\u6536\u8D27\u4EBA\uFF1A'
+				),
+				_react2.default.createElement(
+					_reduxForm.FormSection,
+					{ name: 'recipient' },
+					_react2.default.createElement(Party, null)
+				)
+			);
+		}
+	}]);
+
+	return OrderForm;
+}(_react.Component);
+
+Address.defaultProps = {
+	name: "address"
+};
+
+OrderForm = (0, _reduxForm.reduxForm)({
+	form: 'order_forms',
+	initialValues: {
+		buyer: {
+			givenName: "xxx",
+			middleName: "yyy",
+			surname: "zzz",
+			address: {
+				streetName: '街道名',
+				number: "123",
+				zipCode: "9090"
+			}
+		},
+		recipient: {
+			givenName: "aaa",
+			middleName: "bbb",
+			surname: "ccc",
+			address: {
+				streetName: "foo",
+				number: "4123",
+				zipCode: "78320"
+			}
+		}
+	}
+})(OrderForm);
+
+exports.default = OrderForm;
+
+},{"react":476,"react-redux":226,"redux-form":531}],584:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42321,7 +42917,114 @@ var MainPanel = function (_Component) {
 
 exports.default = MainPanel;
 
-},{"react":476}],583:[function(require,module,exports){
+},{"react":476}],585:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function formatName(user) {
+	return user.firstName + '' + user.lastName;
+}
+
+var user = {
+	firstName: 'Maggie',
+	lastName: 'Hu'
+};
+
+function getGreeting(user) {
+	if (user) {
+		return _react2.default.createElement(
+			'h1',
+			null,
+			'hello,',
+			formatName(user)
+		);
+	} else {
+		return _react2.default.createElement(
+			'h1',
+			null,
+			'hello .S tranger'
+		);
+	}
+}
+
+var element = function (_Component) {
+	_inherits(element, _Component);
+
+	function element(props) {
+		_classCallCheck(this, element);
+
+		var _this = _possibleConstructorReturn(this, (element.__proto__ || Object.getPrototypeOf(element)).call(this, props));
+
+		_this.state = {
+			date: new Date()
+		};
+		return _this;
+	}
+
+	_createClass(element, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				this.props.name,
+				getGreeting(user),
+				getGreeting(),
+				_react2.default.createElement(
+					'h2',
+					null,
+					'It is ',
+					this.state.date.toLocaleTimeString()
+				)
+			);
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			this.timerID = setInterval(function () {
+				return _this2.tick();
+			}, 1000);
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			clearInterval(this.timerID);
+			alert('componentWillUnmount');
+		}
+	}, {
+		key: 'tick',
+		value: function tick() {
+			this.setState({
+				date: new Date()
+			});
+		}
+	}]);
+
+	return element;
+}(_react.Component);
+
+exports.default = element;
+
+},{"react":476}],586:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42369,6 +43072,10 @@ var _counter2 = _interopRequireDefault(_counter);
 var _customerTable = require('../components/customer-table/customer-table');
 
 var _customerTable2 = _interopRequireDefault(_customerTable);
+
+var _test = require('../components/test');
+
+var _test2 = _interopRequireDefault(_test);
 
 var _cusForm2 = require('../components/forms/cus-form');
 
@@ -42507,10 +43214,16 @@ SearchForm = (0, _reduxForm.reduxForm)({
 var App = function (_Component2) {
 	_inherits(App, _Component2);
 
-	function App() {
+	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+		var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+		_this2.changeType = _this2.changeType.bind(_this2);
+		_this2.state = {
+			type: 1
+		};
+		return _this2;
 	}
 
 	_createClass(App, [{
@@ -42532,6 +43245,14 @@ var App = function (_Component2) {
 				null,
 				_react2.default.createElement(SearchForm, null),
 				_react2.default.createElement('hr', null),
+				this.state.type == 1 ? _react2.default.createElement(_test2.default, {
+					name: 'this is my name'
+				}) : '',
+				_react2.default.createElement(
+					'button',
+					{ type: 'button', onClick: this.changeType },
+					'changeType'
+				),
 				_react2.default.createElement(_cusForm3.default, { onSubmit: function onSubmit(val) {
 						return props.dispatch((0, _cusForm.submit)(val));
 					} }),
@@ -42616,6 +43337,13 @@ var App = function (_Component2) {
 			// }
 			// this.props.dispatch(getCustomInfo(data));
 		}
+	}, {
+		key: 'changeType',
+		value: function changeType() {
+			this.setState({
+				type: 2
+			});
+		}
 	}]);
 
 	return App;
@@ -42663,7 +43391,7 @@ function select(state) {
 
 exports.default = (0, _reactRedux.connect)(select)(App);
 
-},{"../action/actions":571,"../action/cus-form":572,"../components/AddTodo":575,"../components/Footer":576,"../components/TodoList":578,"../components/counter":579,"../components/customer-table/customer-table":580,"../components/forms/cus-form":581,"react":476,"react-dom":325,"react-redux":226,"redux":178,"redux-form":531}],584:[function(require,module,exports){
+},{"../action/actions":571,"../action/cus-form":572,"../components/AddTodo":575,"../components/Footer":576,"../components/TodoList":578,"../components/counter":579,"../components/customer-table/customer-table":580,"../components/forms/cus-form":581,"../components/test":585,"react":476,"react-dom":325,"react-redux":226,"redux":178,"redux-form":531}],587:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -42734,7 +43462,7 @@ var rootElement = document.getElementById('reApp');
 	_react2.default.createElement(_router2.default, null)
 ), rootElement);
 
-},{"./containers/App":583,"./reducers/":587,"./router":588,"react":476,"react-dom":325,"react-redux":226,"react-router-dom":243,"redux":178,"redux-actions":485,"redux-logger":568,"redux-promise":569,"redux-thunk":570}],585:[function(require,module,exports){
+},{"./containers/App":586,"./reducers/":590,"./router":591,"react":476,"react-dom":325,"react-redux":226,"react-router-dom":243,"redux":178,"redux-actions":485,"redux-logger":568,"redux-promise":569,"redux-thunk":570}],588:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42748,6 +43476,7 @@ var initForm = {
 	firstName: 'Jane',
 	lastName: 'Doe',
 	sex: 'male',
+	count: 0,
 	employed: true,
 	email: 'langling10@163.com',
 	favoriteColor: 'ff0000',
@@ -42769,7 +43498,7 @@ function submitForm() {
 	}
 }
 
-},{"../action/cus-form":572}],586:[function(require,module,exports){
+},{"../action/cus-form":572}],589:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42817,7 +43546,7 @@ function cusMain() {
 	}
 }
 
-},{"../action/customer-tables":573,"redux":178}],587:[function(require,module,exports){
+},{"../action/customer-tables":573,"redux":178}],590:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42950,7 +43679,7 @@ var todoApp = (0, _redux.combineReducers)({
 
 exports.default = todoApp;
 
-},{"../action/actions.js":571,"./cus-form":585,"./customer-table":586,"redux":178,"redux-form":531}],588:[function(require,module,exports){
+},{"../action/actions.js":571,"./cus-form":588,"./customer-table":589,"redux":178,"redux-form":531}],591:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42975,6 +43704,14 @@ var _cusForm = require('./components/forms/cus-form');
 
 var _cusForm2 = _interopRequireDefault(_cusForm);
 
+var _fieldArraysForm = require('./components/forms/fieldArraysForm');
+
+var _fieldArraysForm2 = _interopRequireDefault(_fieldArraysForm);
+
+var _formSelection = require('./components/forms/formSelection');
+
+var _formSelection2 = _interopRequireDefault(_formSelection);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Routers = function Routers() {
@@ -42985,10 +43722,12 @@ var Routers = function Routers() {
 			_body2.default,
 			null,
 			_react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _index2.default }),
-			_react2.default.createElement(_reactRouterDom.Route, { path: '/form', component: _cusForm2.default })
+			_react2.default.createElement(_reactRouterDom.Route, { path: '/form', component: _cusForm2.default }),
+			_react2.default.createElement(_reactRouterDom.Route, { path: '/fieldArraysForm', component: _fieldArraysForm2.default }),
+			_react2.default.createElement(_reactRouterDom.Route, { path: '/orderForm', component: _formSelection2.default })
 		)
 	);
 };
 exports.default = Routers;
 
-},{"./body":574,"./components/forms/cus-form":581,"./components/main/index":582,"react":476,"react-router-dom":243}]},{},[584]);
+},{"./body":574,"./components/forms/cus-form":581,"./components/forms/fieldArraysForm":582,"./components/forms/formSelection":583,"./components/main/index":584,"react":476,"react-router-dom":243}]},{},[587]);

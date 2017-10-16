@@ -109,10 +109,8 @@ class App extends Component{
 		console.log(this.props);
 		return (
 			<div>
-<<<<<<< HEAD
 				<SearchForm></SearchForm>
 				<hr/>
-=======
 				{
 					this.state.type == 1?
 					<Test 
@@ -120,7 +118,6 @@ class App extends Component{
 				></Test> : ''
 				}
 				<button type="button" onClick={this.changeType}>changeType</button>
->>>>>>> fa15f06e5b925eb9c07552e257ec44d08292b9bc
 				<SimpleForm onSubmit ={val => props.dispatch(submit(val))}/>
 				<input type="text"/>
 				<hr/>

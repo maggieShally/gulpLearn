@@ -1,0 +1,23 @@
+
+
+.fieldBox {
+	li {
+		width: 300px;
+		position: relative;
+
+		.fildDelet {
+			position: absolute;
+			right: 0;
+			top: 0;
+			background-color: #daedea;
+			border: #daedea;
+			color: #ccc;
+			border-radius: 10px;
+		}
+	}
+}
+
+.error {
+	color: #daedea;
+}
+

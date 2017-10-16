@@ -11,6 +11,8 @@ class Main extends Component {
 				<ul className="nav">
 					<li><NavLink to="/home" activeClassName="selected">home</NavLink></li>
 					<li><NavLink to="/form" activeClassName="selected">form</NavLink></li>
+					<li><NavLink to="/fieldArraysform" activeClassName="selected">fieldArraysform</NavLink></li>
+					<li><NavLink to="/orderForm" activeClassName="selected">orderForm</NavLink></li>
 				</ul>
 				<div className="content">
 					{this.props.children}

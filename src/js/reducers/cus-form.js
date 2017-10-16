@@ -5,6 +5,7 @@ const initForm = {
   firstName: 'Jane',
   lastName: 'Doe',
   sex: 'male',
+  count: 0,
   employed: true,
   email: 'langling10@163.com',
   favoriteColor: 'ff0000',
