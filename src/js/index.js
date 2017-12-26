@@ -7,11 +7,10 @@ import { createLogger } 				from 'redux-logger'
 import thunk 							from 'redux-thunk'
 import promiseMiddleware 				from 'redux-promise'
 import { createAction } 				from 'redux-actions'
-import { HashRouter } from 'react-router-dom'
+import { HashRouter } 					from 'react-router-dom'
 
 
 
-import App 								from './containers/App'
 import todoApp 							from './reducers/'
 import Routers                          from './router'
 

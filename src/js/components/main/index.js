@@ -8,7 +8,7 @@ export default class MainPanel extends Component {
 	}
 	render(){
 		return(
-			<h2>this is main page</h2>
+			<h2>this is main page yeah</h2>
 		)
 	}
 }
