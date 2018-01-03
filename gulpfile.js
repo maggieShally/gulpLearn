@@ -2,7 +2,7 @@ var gulp   		= require('gulp');
 var less   		= require('gulp-less');
 var watch  		= require('gulp-watch');
 var uglify 		= require('gulp-uglify');//压缩js
-var minify 		= require('gulp-minify-css');//压缩css
+var minify 		= require('gulp-clean-css');//压缩css
 var sass   		= require('gulp-sass');
 var browserSync = require('browser-sync');//自动刷新
 var useref		= require('gulp-useref');//将多个文件拼接成一个文件
@@ -88,6 +88,9 @@ gulp.task('clean:dist',function(callback){
 
 gulp.task('script:build',function(){
 	return browserify('src/js/index.js')
+		.pipe(babel({  
+            presets: ['es2015']  
+        })) 
 		.transform(babelify,{
 			presets: ["es2015", "react"]
 		})

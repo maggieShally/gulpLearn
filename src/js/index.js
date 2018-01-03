@@ -21,8 +21,6 @@ let store = createStore(
 	applyMiddleware(promiseMiddleware,thunk,logger)
 	);
 
-// console.log('store:'+JSON.stringify(store.getState()));
-
 let next = store.dispatch;
 
 store.dispatch = function dispatchAndLog(action){

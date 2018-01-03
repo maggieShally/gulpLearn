@@ -8,6 +8,7 @@ import  MainIndex 				from './components/main/index'
 import  SimpleForm  			from './components/forms/cus-form'
 import 	FieldArraysForm 		from './components/forms/fieldArraysForm'
 import 	OrderForm 				from './components/forms/formSelection'
+import  HelloWord       		from './components/reactTest/index'
 
 const Routers = () => (
 	<Router>
@@ -16,6 +17,8 @@ const Routers = () => (
 			<Route path="/form" component = { SimpleForm }/>
 			<Route path="/fieldArraysForm" component = { FieldArraysForm }/>
 			<Route path="/orderForm" component = { OrderForm }/>
+			<Route path="/helloWord" component = { HelloWord }/>
+
 		</Main>
 	</Router>
 )

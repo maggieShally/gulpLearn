@@ -4,6 +4,7 @@ import { createStore, combineReducers } 	from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form';
 
 import submitForm 	from './cus-form'
+import reactTest	from './reactTest'
 
 var searchData = {
 	'keywords': '搜索',
@@ -23,6 +24,7 @@ var searchData = {
 const todoApp = combineReducers({
 	searchFormData,
 	submitForm,
+	reactTest,
 	form:reduxFormReducer,
 })
 

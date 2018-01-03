@@ -40556,6 +40556,15 @@ var Main = function (_Component) {
 							{ to: '/orderForm', activeClassName: 'selected' },
 							'orderForm'
 						)
+					),
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.NavLink,
+							{ to: '/helloWord', activeClassName: 'selected' },
+							'helloWord'
+						)
 					)
 				),
 				_react2.default.createElement(
@@ -41543,6 +41552,399 @@ exports.default = MainPanel;
 },{"react":415}],554:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var numbers = [1, 2, 3, 4, 5, 6];
+
+var Couter = function (_Component) {
+	_inherits(Couter, _Component);
+
+	function Couter(props) {
+		_classCallCheck(this, Couter);
+
+		return _possibleConstructorReturn(this, (Couter.__proto__ || Object.getPrototypeOf(Couter)).call(this, props));
+	}
+
+	_createClass(Couter, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'span',
+					null,
+					value
+				),
+				_react2.default.createElement(
+					'button',
+					{ onClick: onIncreaseClick },
+					'Increase'
+				)
+			);
+		}
+	}]);
+
+	return Couter;
+}(_react.Component);
+
+exports.default = Couter;
+
+var HelloWord = function (_Component2) {
+	_inherits(HelloWord, _Component2);
+
+	function HelloWord(props) {
+		_classCallCheck(this, HelloWord);
+
+		var _this2 = _possibleConstructorReturn(this, (HelloWord.__proto__ || Object.getPrototypeOf(HelloWord)).call(this, props));
+
+		_this2.state = {
+			title: 'hello world',
+			show: false
+		};
+		return _this2;
+	}
+
+	_createClass(HelloWord, [{
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
+
+			var _state = this.state,
+			    title = _state.title,
+			    show = _state.show;
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				title,
+				_react2.default.createElement(
+					'p',
+					null,
+					show ? 'ON' : 'OFF'
+				),
+				_react2.default.createElement(Greeting, { show: show }),
+				_react2.default.createElement(
+					'button',
+					{ type: 'button', onClick: function onClick(e) {
+							_this3.changeTitle(show, e);
+						} },
+					'changeTitle'
+				),
+				_react2.default.createElement(
+					'button',
+					{ type: 'button', onClick: function onClick() {
+							_this3.toggle();
+						} },
+					'toggle'
+				),
+				_react2.default.createElement('hr', null),
+				_react2.default.createElement(NumberList, { numbers: numbers }),
+				_react2.default.createElement('hr', null),
+				_react2.default.createElement(FormComponent, null),
+				_react2.default.createElement('hr', null),
+				_react2.default.createElement(WelcomeDialog, null)
+			);
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var title = this.state.title;
+
+			console.log('componentDidMount-title', title);
+		}
+	}, {
+		key: 'shouldComponentUpdate',
+		value: function shouldComponentUpdate(nextProps, nextState) {
+			console.log(nextProps, nextState);
+			if (nextState.title === 'this is changeTitle') {
+				return true;
+			} else {
+				return true;
+			}
+		}
+	}, {
+		key: 'componentWillUpdate',
+		value: function componentWillUpdate() {
+			var title = this.state.title;
+
+			console.log('componentWillUpdate-title', title);
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate() {
+			var title = this.state.title;
+
+			console.log('componentDidUpdate-title', title);
+		}
+	}, {
+		key: 'changeTitle',
+		value: function changeTitle(show, e) {
+			console.log(e.target);
+			console.log(show);
+
+			this.setState({
+				title: 'this is changeTitle'
+			});
+		}
+	}, {
+		key: 'toggle',
+		value: function toggle() {
+			this.setState(function (preState) {
+				return {
+					show: !preState.show
+				};
+			}, function () {
+				console.log(123);
+			});
+		}
+	}]);
+
+	return HelloWord;
+}(_react.Component);
+
+function Greeting(props) {
+	var show = props.show;
+
+	if (show) {
+		return _react2.default.createElement(TrueGreeting, null);
+	} else {
+		return _react2.default.createElement(FalseGreeting, null);
+	}
+}
+
+var TrueGreeting = function TrueGreeting(props) {
+	return _react2.default.createElement(
+		'h2',
+		null,
+		'TrueGreeting'
+	);
+};
+
+var FalseGreeting = function FalseGreeting(props) {
+	return _react2.default.createElement(
+		'h2',
+		null,
+		'FalseGreeting'
+	);
+};
+
+var NumberList = function NumberList(props) {
+	var numbers = props.numbers;
+
+	var listItem = numbers.map(function (item, index) {
+		return _react2.default.createElement(
+			'li',
+			{ key: index },
+			'numberList:',
+			item
+		);
+	});
+	return _react2.default.createElement(
+		'ul',
+		null,
+		listItem
+	);
+};
+
+var FormComponent = function (_Component3) {
+	_inherits(FormComponent, _Component3);
+
+	function FormComponent(props) {
+		_classCallCheck(this, FormComponent);
+
+		var _this4 = _possibleConstructorReturn(this, (FormComponent.__proto__ || Object.getPrototypeOf(FormComponent)).call(this, props));
+
+		_this4.state = {
+			name: '',
+			infoText: 'this is infoText',
+			favio: 'coconut',
+			agree: false
+		};
+		return _this4;
+	}
+
+	_createClass(FormComponent, [{
+		key: 'handleSubmit',
+		value: function handleSubmit(event) {
+			event.preventDefault();
+			alert('A name was submitted:' + this.state.name + 'infoText:' + this.state.infoText);
+		}
+	}, {
+		key: 'handleChange',
+		value: function handleChange(event) {
+			var target = event.target;
+			var name = target.name;
+			var value = target.type === 'checkbox' ? target.checked : target.value;
+			this.setState(_defineProperty({}, name, value));
+		}
+	}, {
+		key: 'textHandleChange',
+		value: function textHandleChange(event) {
+			this.setState({
+				infoText: event.target.value
+			});
+		}
+	}, {
+		key: 'selectHandleChange',
+		value: function selectHandleChange(event) {
+			this.setState({
+				favio: event.target.value
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this5 = this;
+
+			var _state2 = this.state,
+			    name = _state2.name,
+			    infoText = _state2.infoText,
+			    favio = _state2.favio,
+			    agree = _state2.agree;
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement('input', { type: 'text' }),
+				_react2.default.createElement(
+					'form',
+					{ onSubmit: function onSubmit(e) {
+							return _this5.handleSubmit(e);
+						} },
+					_react2.default.createElement(
+						'label',
+						null,
+						'Agree:',
+						_react2.default.createElement('input', { type: 'checkbox', checked: agree, name: 'agree', onChange: function onChange(e) {
+								return _this5.handleChange(e);
+							} })
+					),
+					_react2.default.createElement(
+						'label',
+						null,
+						'Name:',
+						_react2.default.createElement('input', { type: 'text', value: name, name: 'name', onChange: function onChange(e) {
+								return _this5.handleChange(e);
+							} })
+					),
+					_react2.default.createElement(
+						'label',
+						null,
+						'TextArea:',
+						_react2.default.createElement('textarea', { value: infoText, name: 'infoText', onChange: function onChange(e) {
+								return _this5.handleChange(e);
+							} })
+					),
+					_react2.default.createElement(
+						'lable',
+						null,
+						'Favio:',
+						_react2.default.createElement(
+							'select',
+							{ value: favio, name: 'favio', onChange: function onChange(e) {
+									return _this5.handleChange(e);
+								} },
+							_react2.default.createElement(
+								'option',
+								{ value: 'lemon' },
+								'lemon'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: 'coconut' },
+								'coconut'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: 'mango' },
+								'mango'
+							)
+						)
+					),
+					_react2.default.createElement('input', { type: 'submit', value: 'submit' })
+				),
+				'userInput: ',
+				name,
+				'infoText: ',
+				infoText,
+				'favio: ',
+				favio,
+				'agree: ',
+				agree
+			);
+		}
+	}]);
+
+	return FormComponent;
+}(_react.Component);
+
+var FancyBorder = function FancyBorder(props) {
+	return _react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(
+			'div',
+			{ className: props.color },
+			props.left
+		),
+		_react2.default.createElement(
+			'div',
+			{ className: props.color },
+			props.right
+		)
+	);
+};
+
+var LeftSec = function LeftSec(props) {
+	return _react2.default.createElement(
+		'div',
+		null,
+		'this is Left'
+	);
+};
+var RightSec = function RightSec(props) {
+	return _react2.default.createElement(
+		'div',
+		null,
+		'this is Right'
+	);
+};
+
+var WelcomeDialog = function WelcomeDialog(props) {
+	return _react2.default.createElement(
+		FancyBorder,
+		{ color: 'red',
+			left: _react2.default.createElement(LeftSec, null),
+			right: _react2.default.createElement(RightSec, null)
+		},
+		'this is redColor'
+	);
+};
+
+// export default HelloWord
+
+},{"react":415}],555:[function(require,module,exports){
+'use strict';
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -41582,8 +41984,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var logger = (0, _reduxLogger.createLogger)();
 var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxPromise2.default, _reduxThunk2.default, logger));
 
-// console.log('store:'+JSON.stringify(store.getState()));
-
 var next = store.dispatch;
 
 store.dispatch = function dispatchAndLog(action) {
@@ -41607,7 +42007,7 @@ var rootElement = document.getElementById('reApp');
 	_react2.default.createElement(_router2.default, null)
 ), rootElement);
 
-},{"./reducers/":556,"./router":557,"react":415,"react-dom":225,"react-redux":360,"react-router-dom":377,"redux":540,"redux-actions":449,"redux-logger":532,"redux-promise":533,"redux-thunk":534}],555:[function(require,module,exports){
+},{"./reducers/":557,"./router":558,"react":415,"react-dom":225,"react-redux":360,"react-router-dom":377,"redux":540,"redux-actions":449,"redux-logger":532,"redux-promise":533,"redux-thunk":534}],556:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41643,7 +42043,7 @@ function submitForm() {
 	}
 }
 
-},{"../action/cus-form":548}],556:[function(require,module,exports){
+},{"../action/cus-form":548}],557:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41683,7 +42083,7 @@ var todoApp = (0, _redux.combineReducers)({
 
 exports.default = todoApp;
 
-},{"./cus-form":555,"redux":540,"redux-form":495}],557:[function(require,module,exports){
+},{"./cus-form":556,"redux":540,"redux-form":495}],558:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41716,6 +42116,10 @@ var _formSelection = require('./components/forms/formSelection');
 
 var _formSelection2 = _interopRequireDefault(_formSelection);
 
+var _index3 = require('./components/reactTest/index');
+
+var _index4 = _interopRequireDefault(_index3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Routers = function Routers() {
@@ -41728,10 +42132,11 @@ var Routers = function Routers() {
 			_react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _index2.default }),
 			_react2.default.createElement(_reactRouterDom.Route, { path: '/form', component: _cusForm2.default }),
 			_react2.default.createElement(_reactRouterDom.Route, { path: '/fieldArraysForm', component: _fieldArraysForm2.default }),
-			_react2.default.createElement(_reactRouterDom.Route, { path: '/orderForm', component: _formSelection2.default })
+			_react2.default.createElement(_reactRouterDom.Route, { path: '/orderForm', component: _formSelection2.default }),
+			_react2.default.createElement(_reactRouterDom.Route, { path: '/helloWord', component: _index4.default })
 		)
 	);
 };
 exports.default = Routers;
 
-},{"./body":549,"./components/forms/cus-form":550,"./components/forms/fieldArraysForm":551,"./components/forms/formSelection":552,"./components/main/index":553,"react":415,"react-router-dom":377}]},{},[554]);
+},{"./body":549,"./components/forms/cus-form":550,"./components/forms/fieldArraysForm":551,"./components/forms/formSelection":552,"./components/main/index":553,"./components/reactTest/index":554,"react":415,"react-router-dom":377}]},{},[555]);
