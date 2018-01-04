@@ -1,8 +1,8 @@
 
 
-export const INCREASEACTION = 'INCREASEACTION'
+const INCREASEACTION = 'INCREASEACTION'
 
-export increaseAction = () => {
+const increaseAction = () => {
 	return {
 		type: INCREASEACTION
 	}
@@ -10,5 +10,6 @@ export increaseAction = () => {
 
 
 export default {
+	increaseAction,
 	INCREASEACTION
 }

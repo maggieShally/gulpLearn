@@ -1,11 +1,11 @@
 import actionType from '../action/reactTest'
 
-const state = {
+const initState = {
 	value : 1
 }
 
 
-const reatTest = (state = state, action)=>{
+const reactTest = (state = initState, action)=>{
 	switch(action.type){
 		case actionType.INCREASEACTION:
 			const val = state.value+1;
@@ -14,3 +14,5 @@ const reatTest = (state = state, action)=>{
 			return state
 	}
 }
+
+export default reactTest

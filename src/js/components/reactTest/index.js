@@ -1,92 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-
+import Actions from '../../action/reactTest'
 const numbers = [1,2,3,4,5,6];
 
 
-class Couter extends Component{
-	constructor(props){
-		super(props)
-	}
-	render(){
-		return(
-			<div>
-				<span>{value}</span>
-				<button onClick={onIncreaseClick}>Increase</button>
-			</div>
-		)
-	}
-}
-
-export default Couter
-
-
-
-class HelloWord extends Component {
-	constructor(props){
-		super(props)
-		this.state= {
-			title: 'hello world',
-			show:false
-		}
-	}
-	render(){
-		const { title, show } = this.state;
-		return(
-			<div>
-				{title}
-				<p>{ show ? 'ON':'OFF'}</p>
-				<Greeting {...{show}}/>
-				<button type="button" onClick={(e)=>{this.changeTitle(show,e)}}>changeTitle</button>
-				<button type="button" onClick={()=>{this.toggle()}}>toggle</button>
-				<hr/>
-				<NumberList {...{numbers}}/>
-				<hr/>
-				<FormComponent/>
-				<hr/>
-				<WelcomeDialog/>
-			</div>
-
-		)	
-	}
-	componentDidMount(){
-		const { title } = this.state;
-		console.log('componentDidMount-title',title);
-	}
-	shouldComponentUpdate(nextProps, nextState){
-		console.log(nextProps, nextState);
-		if(nextState.title==='this is changeTitle'){
-			return true
-		}else {
-			return true
-		}
-		
-	}
-	componentWillUpdate(){
-		const { title } = this.state;
-		console.log('componentWillUpdate-title',title);
-	}
-	componentDidUpdate(){
-		const { title } = this.state;
-		console.log('componentDidUpdate-title',title);
-
-	}
-	changeTitle(show,e){
-		console.log(e.target);
-		console.log(show);
-
-		this.setState({
-			title: 'this is changeTitle'
-		})
-	}
-	toggle(){
-		this.setState(preState=>({
-			show: !preState.show
-		}),()=>{
-			console.log(123)
-		})
-	}
-}
 
 
 function Greeting(props){
@@ -219,4 +137,105 @@ const WelcomeDialog = props=>{
 	)
 }
 
-// export default HelloWord
+class Couter extends Component{
+	constructor(props){
+		super(props)
+	}
+	render(){
+		const { value } = this.props.reactTest
+		console.log(this.props)
+		return(
+			<div>
+				<span>{value}</span>
+				<button onClick={()=>{this.onIncreaseClick()}}>Increase</button>
+			</div>
+		)
+	}
+	onIncreaseClick(){
+		// this.props.dispatch(Actions.increaseAction());
+		this.props.increaseAction();
+	}
+}
+
+
+
+class HelloWord extends Component {
+	constructor(props){
+		super(props)
+		this.state= {
+			title: 'hello world',
+			show:false
+		}
+	}
+
+	componentDidMount(){
+		const { title } = this.state;
+		console.log('componentDidMount-title',title);
+	}
+	shouldComponentUpdate(nextProps, nextState){
+		console.log(nextProps, nextState);
+		if(nextState.title==='this is changeTitle'){
+			return true
+		}else {
+			return true
+		}
+		
+	}
+	componentWillUpdate(){
+		const { title } = this.state;
+		console.log('componentWillUpdate-title',title);
+	}
+	componentDidUpdate(){
+		const { title } = this.state;
+		console.log('componentDidUpdate-title',title);
+
+	}
+	changeTitle(show,e){
+		console.log(e.target);
+		console.log(show);
+
+		this.setState({
+			title: 'this is changeTitle'
+		})
+	}
+	toggle(){
+		this.setState(preState=>({
+			show: !preState.show
+		}),()=>{
+			console.log(123)
+		})
+	}
+	render(){
+		const { props} = this,
+		{ reactTest,increaseAction } = props;
+		const { title, show } = this.state;
+		return(
+			<div>
+				{title}
+				<hr/>
+				<Couter {...{reactTest,increaseAction}}/>
+				<hr/>
+				<p>{ show ? 'ON':'OFF'}</p>
+				<Greeting {...{show}}/>
+				<button type="button" onClick={(e)=>{this.changeTitle(show,e)}}>changeTitle</button>
+				<button type="button" onClick={()=>{this.toggle()}}>toggle</button>
+				<hr/>
+				<NumberList {...{numbers}}/>
+				<hr/>
+				<FormComponent/>
+				<hr/>
+				<WelcomeDialog/>
+			</div>
+
+		)	
+	}
+}
+
+
+const mapDispatchToProps = (dispatch)=>{
+	return {
+		increaseAction:()=> dispatch(Actions.increaseAction())
+	}
+}
+
+export default connect(({reactTest})=>({reactTest}),mapDispatchToProps)(HelloWord)

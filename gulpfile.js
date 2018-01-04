@@ -2,7 +2,7 @@ var gulp   		= require('gulp');
 var less   		= require('gulp-less');
 var watch  		= require('gulp-watch');
 var uglify 		= require('gulp-uglify');//压缩js
-var minify 		= require('gulp-clean-css');//压缩css
+var cssmin 		= require('gulp-clean-css');//压缩css
 var sass   		= require('gulp-sass');
 var browserSync = require('browser-sync');//自动刷新
 var useref		= require('gulp-useref');//将多个文件拼接成一个文件
@@ -24,7 +24,7 @@ gulp.task('testLess',function(){
 	gulp.src(['src/less/*.less'])
 		.pipe(less())
 		.pipe(gulp.dest('./src/css'))
-		.pipe(minify())
+		.pipe(cssmin())
 		.pipe(gulp.dest('./src/css'))
 })
 
@@ -54,7 +54,7 @@ gulp.task('browserSync',function(){
 
 gulp.task('useref',function(){
 	return gulp.src('src/pages/*.html')
-			.pipe(gulpIf('*.css',minify()))
+			.pipe(gulpIf('*.css',cssmin()))
 			.pipe(gulpIf('*.js',uglify()))
 			.pipe(useref())
 			.pipe(gulp.dest('dist/js/'));
@@ -79,22 +79,31 @@ gulp.task('clean:dist',function(callback){
 })
 
 // gulp.task('es6',function(){
-// 		 	gulp.src('src/**/*.js')
-// 			.pipe(babel({compact: false}))
-// 			.pipe(gulp.dest('src/js/es6'))
-
+//  	gulp.src('src/**/*.js')
+//  	.pipe(babel({  
+//         presets: ['es2015']  
+//     }))  
+// 	.pipe(gulp.dest('src/js/es6'))
 // })
 
 
+gulp.task('scripts',function(){
+	gulp.src('src/**/*.js')
+	.pipe(babel({presets:['es2015','stage-2','react']}))
+	.pipe(uglify())
+	.pipe(gulp.dest('dist/js'))
+})
+
 gulp.task('script:build',function(){
-	return browserify('src/js/index.js')
-		.pipe(babel({  
-            presets: ['es2015']  
-        })) 
-		.transform(babelify,{
-			presets: ["es2015", "react"]
-		})
-		.bundle()
+	return browserify('src/js/index.js')		
+		.transform(babelify, {  //此处babel的各配置项格式与.babelrc文件相同
+		      presets: [
+		        'es2015',  //转换es6代码
+		        'stage-2',  //指定转换es7代码的语法提案阶段
+		        'react'  //转换React的jsx
+		      ]
+		    })
+		.bundle()		
 		.pipe(source('bundle2.js'))
 		.pipe(gulp.dest('src/js/js'))
 })
