@@ -88,9 +88,6 @@ gulp.task('clean:dist',function(callback){
 
 gulp.task('script:build',function(){
 	return browserify('src/js/index.js')
-		.pipe(babel({  
-            presets: ['es2015']  
-        })) 
 		.transform(babelify,{
 			presets: ["es2015", "react"]
 		})

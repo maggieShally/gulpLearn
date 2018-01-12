@@ -1,8 +1,9 @@
 
+import { createActions, handleActions, combineActions } from 'redux-actions'
 
-export const INCREASEACTION = 'INCREASEACTION'
+const INCREASEACTION = 'INCREASEACTION'
 
-export increaseAction = () => {
+const increaseAction = () => {
 	return {
 		type: INCREASEACTION
 	}
