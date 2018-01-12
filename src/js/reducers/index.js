@@ -1,7 +1,6 @@
-
-
 import { createStore, combineReducers } 	from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form';
+import { handleActions } from 'redux-actions'
 
 import submitForm 	from './cus-form'
 import reactTest	from './reactTest'
@@ -17,8 +16,6 @@ var searchData = {
 	}
 	return state
 }
-
-
 
 
 const todoApp = combineReducers({
