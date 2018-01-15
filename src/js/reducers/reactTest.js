@@ -10,34 +10,19 @@ const initState = {
 }
 
 
-const reactTest = handleActions({
-	COUNT: {
-		INCREASE: (state, action) => {
-			let val = state.value+1;
-			return { ...state, value: val  }
+const reactTest =  handleActions({
+	REACTTEST: {
+		COUNT:{
+			INCREASE:(state, action)=>{
+				console.log(action.payload);
+				let val = state.value +1 ;
+				return {...state,value: val}
+			}
 		}
-	},
-	// "COUNT/INCREASE":(state, action) => {
-	// 	let val = state.value+1;
-	// 	return { ...state, value: val  }
-	// }
-  }, initState)
-
-// const reactTest =  handleActions({
-// 	REACTTEST:{
-// 		COUNTER:{
-// 			INCREASE:(state, action)=>{
-// 				console.log(action.payload);
-// 				let val = state.value +1 ;
-// 				return {...state,value: val}
-// 			}
-// 		}
-// 	}
-// },
-// initState
-// )
-
-
+	}
+},
+initState
+)
 
 export default reactTest
 

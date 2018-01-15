@@ -2,8 +2,10 @@
 import { createActions, handleActions, combineActions } from 'redux-actions'
 
 const actionCreators = createActions({
-	COUNT:{
-		INCREASE:amount => ({ amount })
+	REACTTEST: {
+		COUNT:{
+			INCREASE:amount => ({ amount })
+		}
 	}
 	
 })
