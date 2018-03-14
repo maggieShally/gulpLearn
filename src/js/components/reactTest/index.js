@@ -10,16 +10,22 @@ class Couter extends Component{
 		super(props)
 	}
 	render(){
-		const { value } = this.props;
+		const { value, props } = this.props;
+		console.log(props);
 		return( 
 			<div>
-				<span>{value}</span>
-				<button onClick={()=>this.onIncreaseClick()}>Increase</button>
+				<span>{value}</span> <button onClick={()=>this.onIncreaseClick()}>Increase</button>
+
+				电话：<input type="text"  onChange={(e) => props.phoneChangeHandler(e.target.value.trim())} /> 
+				验证码：<input type="text" onChange={(e) => props.pswChangeHandler(e.target.value.trim())} /> 
+				<button onClick={()=>props.submitHandler(props)}>提交</button>
+
+				
 			</div>
 		)
 	}
 	onIncreaseClick(){
-		this.props.dispatch(actionCreators.count.increase())
+		this.props.dispatch(actionCreators.reacttest.count.increase())
 	}
 }
 
@@ -33,12 +39,13 @@ class HelloWord extends Component {
 		}
 	}
 	render(){
+		const {props} = this;
 		const { title, show } = this.state;
-		const {reactTest:{value}, dispatch } = this.props;
+		const { value, dispatch } = this.props;
 		return(
 			<div>
 				{title}
-				<Couter {...{value, dispatch}}></Couter>
+				<Couter {...{value, dispatch, props}}></Couter>
 				<p>{ show ? 'ON':'OFF'}</p>
 				<Greeting {...{show}}/>
 				<button type="button" onClick={(e)=>{this.changeTitle(show,e)}}>changeTitle</button>
@@ -223,4 +230,20 @@ const WelcomeDialog = props=>{
 	)
 }
 
-export default connect(({reactTest})=>({reactTest}))(HelloWord)
+
+const mapStateToProps = (state) =>{
+	return {
+		...state.reactTest
+	}
+}
+
+const mapDispatchToProps = {
+		phoneChangeHandler: phone => actionCreators.reacttest.set.phone(phone),
+		pswChangeHandler: password => actionCreators.reacttest.set.password(password),
+		submitHandler: (info) => actionCreators.reacttest.effects.submitInfo({
+			phone: info.phone,
+			password: info.phone
+		})
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HelloWord)

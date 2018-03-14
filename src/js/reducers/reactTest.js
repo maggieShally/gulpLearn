@@ -6,7 +6,9 @@ import actionCreatorsReactTest from '../action/reactTest'
 
 
 const initState = {
-	value : 1
+	value : 1,
+	phone: undefined,
+	password: undefined,
 }
 
 
@@ -15,8 +17,23 @@ const reactTest =  handleActions({
 		COUNT:{
 			INCREASE:(state, action)=>{
 				console.log(action.payload);
-				let val = state.value +1 ;
+				let val = state.value + 1 ;
 				return {...state,value: val}
+			}
+		},
+		SET:{
+			PHONE:(state, action)=>{
+				console.log(action.payload);
+				return {...state,phone: action.payload}
+			},
+			PASSWORD:( state, action) => {
+				return {...state,password: action.payload}
+			}
+		},
+		EFFECTS: {
+			SUBMIT_INFO:(state, action) => {
+				console.log(action.payload);
+				return {...state}
 			}
 		}
 	}

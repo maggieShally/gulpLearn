@@ -4,28 +4,20 @@ import { createActions, handleActions, combineActions } from 'redux-actions'
 const actionCreators = createActions({
 	REACTTEST: {
 		COUNT:{
-			INCREASE:amount => ({ amount })
+			// INCREASE:amount => ({ amount }),
+			INCREASE: undefined,
+
+		},
+		SET: {
+			PHONE: undefined,
+			PASSWORD: undefined,
+		},
+		EFFECTS : {
+			SUBMIT_INFO: userInfo => ({...userInfo})	
 		}
 	}
 	
 })
 
 
-export default actionCreators
-
-
-
-// const INCREASEACTION = 'INCREASEACTION'
-
-// const increaseAction = () => {
-// 	console.log(increaseAction);
-// 	return {
-// 		type: INCREASEACTION
-// 	}
-// }
-
-
-// export default {
-// 	increaseAction,
-// 	INCREASEACTION
-// }
+export default actionCreators;
